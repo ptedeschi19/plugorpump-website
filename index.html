@@ -948,11 +948,15 @@
                 const progressFill = document.getElementById('progressFill');
                 const recommendationText = document.getElementById('recommendation-text');
                 const recommendationTitle = document.getElementById('resultsTitle');
+                const prevBtn = document.getElementById('prevBtn');
+                const nextBtn = document.getElementById('nextBtn');
+
                 let currentQuestion = 0;
                 let userResponses = {};
 
                 function updateProgress() {
-                    const progressPercentage = ((currentQuestion + 1) / questions.length) * 100;
+                    const totalQuestions = questions.length - 1; // Exclude results slide
+                    const progressPercentage = totalQuestions > 0 ? (currentQuestion / totalQuestions) * 100 : 0;
                     progressFill.style.width = `${progressPercentage}%`;
                 }
 
@@ -961,51 +965,113 @@
                         question.classList.toggle('active', idx === index);
                     });
                     updateProgress();
-                    document.getElementById('prevBtn').disabled = index === 0;
-                    document.getElementById('nextBtn').disabled = index === questions.length - 1;
+                    prevBtn.disabled = index === 0;
+                    nextBtn.disabled = index >= questions.length - 2; // Disable on last question
+
+                    if (index === questions.length - 1) {
+                        // Hide nav buttons on results page
+                        prevBtn.style.display = 'none';
+                        nextBtn.style.display = 'none';
+                    } else {
+                        prevBtn.style.display = 'inline-block';
+                        nextBtn.style.display = 'inline-block';
+                    }
                 }
 
                 function navigate(direction) {
-                    currentQuestion += direction;
-                    showQuestion(currentQuestion);
-                    if (currentQuestion === questions.length - 1) {
-                        displayResults();
+                    const newQuestion = currentQuestion + direction;
+                    if (newQuestion >= 0 && newQuestion < questions.length) {
+                        currentQuestion = newQuestion;
+                        showQuestion(currentQuestion);
+                        if (currentQuestion === questions.length - 1) {
+                            displayResults();
+                        }
                     }
                 }
 
                 function displayResults() {
-                    const { 1: budget, 3: homeCharge, 4: roadTrips, 5: importance, 6: companions, 7: roadType, 8: drivingExperience } = userResponses;
-                    let vehicleType = '';
-                    let energySource = '';
+                    const responses = userResponses;
+                    const annualMileage = parseInt(responses['1'] || 0);
+                    const budget = parseInt(responses['2'] || 0);
+                    const homeCharge = responses['3'] || 'no';
+                    const roadTrips = responses['4'] || 'never';
+                    const importance = responses['5'] || 'cost';
+                    const passengers = parseInt(responses['6'] || 1);
+                    const roadType = responses['7'] || 'mixed';
+                    const experience = responses['8'] || 'comfort';
 
-                    // Simple logic for demonstration, can be expanded
-                    if (budget <= 35000 && homeCharge === 'no' && roadTrips === 'never') {
-                        vehicleType = 'a compact car';
-                        energySource = 'gas';
-                    } else if (budget > 35000 && roadType === 'highway' && drivingExperience === 'performance') {
-                        vehicleType = 'a sports car';
-                        energySource = 'gas';
-                    } else if (homeCharge === 'yes-garage' || homeCharge === 'yes-driveway') {
-                        vehicleType = 'a sedan';
-                        energySource = 'electric';
-                    } else {
-                        vehicleType = 'an SUV';
-                        energySource = 'electric';
+                    let score = {
+                        electric: 0,
+                        gas: 0,
+                        hybrid: 0
+                    };
+
+                    // Mileage
+                    if (annualMileage > 15000) score.electric += 2; else score.gas += 1;
+                    if (annualMileage < 10000) score.gas += 1; else score.electric += 1;
+
+                    // Budget
+                    if (budget < 30000) { score.gas += 2; score.hybrid += 1; } 
+                    else if (budget >= 40000) { score.electric += 2; }
+                    else { score.hybrid += 1; score.electric += 1; }
+
+                    // Home Charging
+                    if (homeCharge.startsWith('yes')) score.electric += 3; else { score.gas += 2; score.hybrid += 2; }
+                    if (homeCharge === 'no') score.gas += 2;
+
+                    // Road Trips
+                    if (roadTrips === 'weekly' || roadTrips === 'monthly') { score.gas += 3; score.hybrid += 2; } 
+                    else { score.electric += 1; }
+
+                    // Importance
+                    if (importance === 'environment') score.electric += 3;
+                    if (importance === 'cost') { score.gas += 1; score.hybrid += 1; }
+                    if (importance === 'convenience') { score.gas += 2; score.hybrid += 1; }
+                    if (importance === 'technology') score.electric += 2;
+
+                    // Passengers
+                    if (passengers >= 4) { score.gas += 1; score.hybrid += 1; } // More SUV options
+
+                    // Road Type
+                    if (roadType === 'city') score.electric += 2;
+                    if (roadType === 'highway') { score.gas += 1; score.hybrid += 1; }
+
+                    // Experience
+                    if (experience === 'performance') { score.electric += 1; score.gas += 1; }
+                    if (experience === 'comfort') score.electric += 2;
+                    if (experience === 'utility') { score.gas += 1; score.hybrid += 1; }
+
+                    let recommendedType = 'a Hybrid';
+                    if (score.electric > score.gas && score.electric > score.hybrid) {
+                        recommendedType = 'an Electric Vehicle (EV)';
+                    } else if (score.gas > score.electric && score.gas > score.hybrid) {
+                        recommendedType = 'a Gas-Powered Vehicle';
                     }
 
-                    recommendationTitle.innerText = 'We recommend...';
-                    recommendationText.innerHTML = `Based on your responses, we suggest considering ${vehicleType} powered by ${energySource}. This combination offers a balance of your desired features and practical considerations.`;
+                    let recommendationHTML = `Based on your responses, we believe <strong>${recommendedType}</strong> would be a wonderful fit for you. `;
+
+                    if (recommendedType.includes('Electric')) {
+                        recommendationHTML += 'You seem to value sustainability and modern technology, and have the home setup to make charging a breeze. An EV will likely offer you a quiet, smooth, and cost-effective driving experience.';
+                    } else if (recommendedType.includes('Gas')) {
+                        recommendationHTML += 'Your driving habits suggest that the flexibility and convenience of a traditional gas car would suit you best, especially for longer trips and quick refueling. ';
+                    } else {
+                        recommendationHTML += 'A hybrid offers a fantastic blend of fuel efficiency and convenience, giving you a taste of electric driving without any range concerns. It’s a versatile choice for your varied needs.';
+                    }
+
+                    recommendationTitle.innerText = 'Our Recommendation For You';
+                    recommendationText.innerHTML = recommendationHTML;
                     showQuestion(questions.length - 1);
                 }
 
                 // Event listeners for answer options
                 document.querySelectorAll('.answer-option').forEach(option => {
                     option.addEventListener('click', function() {
-                        const questionId = this.closest('.question').id;
+                        const questionEl = this.closest('.question');
+                        const questionId = questionEl.id;
                         const value = this.getAttribute('data-value');
 
                         // Mark the selected option
-                        this.parentNode.querySelectorAll('.answer-option').forEach(opt => {
+                        questionEl.querySelectorAll('.answer-option').forEach(opt => {
                             opt.classList.remove('selected');
                         });
                         this.classList.add('selected');
@@ -1013,17 +1079,46 @@
                         // Save the response
                         userResponses[questionId.replace('question', '')] = value;
 
-                        // Navigate to the next question if not on the last question
-                        if (currentQuestion < questions.length - 1) {
-                            navigate(1);
-                        } else {
-                            displayResults();
-                        }
+                        // Automatically navigate to the next question
+                        setTimeout(() => {
+                            if (currentQuestion < questions.length - 1) {
+                                navigate(1);
+                            } else {
+                                displayResults();
+                            }
+                        }, 200); // A brief delay for user to see selection
                     });
                 });
 
                 // Initial setup
                 showQuestion(currentQuestion);
+
+                function showTools() {
+                    document.querySelector('.questionnaire-section').classList.remove('active');
+                    document.querySelector('.calculator-section').classList.remove('active');
+                    document.querySelector('.tool-selection').style.display = 'block';
+                    // Reset questionnaire
+                    currentQuestion = 0;
+                    userResponses = {};
+                    showQuestion(0);
+                    document.querySelectorAll('.answer-option').forEach(opt => opt.classList.remove('selected'));
+                }
+
+                function showQuestionnaire() {
+                    document.querySelector('.tool-selection').style.display = 'none';
+                    document.querySelector('.questionnaire-section').classList.add('active');
+                    // Reset questionnaire to first question
+                    currentQuestion = 0;
+                    userResponses = {};
+                    showQuestion(0);
+                    document.querySelectorAll('.answer-option').forEach(opt => opt.classList.remove('selected'));
+                }
+
+                function showCalculator() {
+                    document.querySelector('.tool-selection').style.display = 'none';
+                    document.querySelector('.calculator-section').classList.add('active');
+                }
+
             </script>
         </div>
     </section>

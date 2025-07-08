@@ -1,886 +1,11 @@
-</head>
-<body>
-    <!-- Navigation -->
-    <nav class="navbar">
-        <div class="nav-container">
-            <a href="#home" class="logo">
-                plugorpump.com
-            </a>
-            <ul class="nav-menu">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#how-it-works">How It Works</a></li>
-                <li><a href="#pricing">Pricing</a></li>
-                <li><a href="#calculator">Free Calculator</a></li>
-            </ul>
-        </div>
-    </nav>
-
-    <!-- Hero Section -->
-    <section id="home" class="hero">
-        <div class="hero-container">
-            <div class="hero-content">
-                <h1>Stop Guessing About Your Vehicle Decision</h1>
-                <p class="hero-subtitle">
-                    Get a professional-grade vehicle decision report for $79 — the same analysis consultants charge $2,000+ for
-                </p>
-                <div class="hero-value-props">
-                    <div class="value-prop">
-                        <span class="value-icon">📊</span>
-                        <span>25-page personalized analysis</span>
-                    </div>
-                    <div class="value-prop">
-                        <span class="value-icon">🗺️</span>
-                        <span>Location-specific charging data</span>
-                    </div>
-                    <div class="value-prop">
-                        <span class="value-icon">💰</span>
-                        <span>10-year financial projections</span>
-                    </div>
-                    <div class="value-prop">
-                        <span class="value-icon">🚗</span>
-                        <span>Specific vehicle recommendations</span>
-                    </div>
-                </div>
-                <div class="hero-cta">
-                    <a href="#calculator" class="cta-button-primary">Try Our Free Calculator First</a>
-                    <a href="#pricing" class="cta-button-secondary">Get Your Report - $79</a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- How It Works Section -->
-    <section id="how-it-works" class="how-it-works">
-        <div class="tools-container">
-            <div class="tools-header">
-                <h2 class="tools-title">How It Works</h2>
-                <p class="tools-subtitle">
-                    Get professional-grade vehicle analysis in three simple steps
-                </p>
-            </div>
-            
-            <div class="process-grid">
-                <div class="process-step">
-                    <div class="step-number">1</div>
-                    <h3>Try Our Free Calculator</h3>
-                    <p>Get a taste of our analysis with our sophisticated calculator. See potential savings and get basic recommendations.</p>
-                </div>
-                
-                <div class="process-step">
-                    <div class="step-number">2</div>
-                    <h3>Order Your Personal Report</h3>
-                    <p>Answer 20 detailed questions about your specific situation, location, and preferences. We analyze your unique needs.</p>
-                </div>
-
-                <div class="process-step">
-                    <div class="step-number">3</div>
-                    <h3>Receive Expert Analysis</h3>
-                    <p>Get your 25-page personalized report within 48 hours, with specific vehicle recommendations and financial projections.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Pricing Section -->
-    <section id="pricing" class="pricing-section">
-        <div class="tools-container">
-            <div class="tools-header">
-                <h2 class="tools-title">Simple, Transparent Pricing</h2>
-                <p class="tools-subtitle">
-                    Professional vehicle analysis at a fraction of consultant prices
-                </p>
-            </div>
-            
-            <div class="pricing-grid">
-                <div class="pricing-card">
-                    <div class="pricing-header">
-                        <h3>Free Calculator</h3>
-                        <div class="price">$0</div>
-                        <p>Try our analysis</p>
-                    </div>
-                    <div class="pricing-features">
-                        <div class="feature">✓ Basic EV vs Gas comparison</div>
-                        <div class="feature">✓ 5-year cost projection</div>
-                        <div class="feature">✓ Simple recommendations</div>
-                        <div class="feature">✓ No commitment required</div>
-                    </div>
-                    <a href="#calculator" class="pricing-button pricing-button-outline">Try Free Calculator</a>
-                </div>
-
-                <div class="pricing-card pricing-card-featured">
-                    <div class="pricing-badge">Most Popular</div>
-                    <div class="pricing-header">
-                        <h3>Personal Report</h3>
-                        <div class="price">$79</div>
-                        <p>Comprehensive analysis</p>
-                    </div>
-                    <div class="pricing-features">
-                        <div class="feature">✓ 25-page personalized report</div>
-                        <div class="feature">✓ Location-specific charging analysis</div>
-                        <div class="feature">✓ 5, 7, 10-year projections</div>
-                        <div class="feature">✓ Specific vehicle recommendations</div>
-                        <div class="feature">✓ Local incentives analysis</div>
-                        <div class="feature">✓ 48-hour delivery</div>
-                    </div>
-                    <a href="#order" class="pricing-button">Get Your Report</a>
-                </div>
-
-                <div class="pricing-card">
-                    <div class="pricing-header">
-                        <h3>Additional Reports</h3>
-                        <div class="price">$10</div>
-                        <p>Each additional scenario</p>
-                    </div>
-                    <div class="pricing-features">
-                        <div class="feature">✓ Different family size</div>
-                        <div class="feature">✓ Alternative location</div>
-                        <div class="feature">✓ Different budget range</div>
-                        <div class="feature">✓ Future scenario planning</div>
-                    </div>
-                    <a href="#order" class="pricing-button pricing-button-outline">Add Scenarios</a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Calculator Section Repositioned -->
-    <section id="calculator" class="tool-selection">
-        <div class="tools-container">
-            <div class="tools-header">
-                <h2 class="tools-title">Try Our Free Calculator</h2>
-                <p class="tools-subtitle">
-                    Get a preview of our analysis capabilities — see why thousands trust our recommendations
-                </p>
-            </div>
-            
-            <div class="tools-grid">
-                <div class="tool-card" onclick="showQuestionnaire()">
-                    <h3>Interactive Questionnaire</h3>
-                    <p>
-                        Get personalized insights in minutes.
-                    </p>
-                    <button class="tool-button">Start Free Analysis</button>
-                </div>
-                
-                <div class="tool-card" onclick="showCalculator()">
-                    <h3>Quick Calculator</h3>
-                    <p>
-                        Input your numbers directly and see instant results. Perfect for getting 
-                        a quick cost comparison.
-                    </p>
-                    <button class="tool-button">Try Calculator</button>
-                </div>
-            </div>
-
-            <div class="calculator-note">
-                <p>💡 <strong>Want more?</strong> Our free calculator gives you basic insights. 
-                For comprehensive analysis including local charging infrastructure, specific vehicle recommendations, 
-                and detailed financial projections, <a href="#pricing">get your personalized report for $79</a>.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Questionnaire Section -->
-    <section class="questionnaire-section">
-        <div class="section-container">
-            <a href="#calculator" class="back-button" onclick="showTools()">← Back to Calculator</a>
-            
-            <div class="section-header">
-                <h2 class="section-title">Vehicle Decision Questionnaire</h2>
-                <p class="section-subtitle">
-                    We'll guide you through key questions to help determine the best vehicle type for you.
-                </p>
-            </div>
-
-            <div class="questionnaire-card">
-                <div class="progress-bar">
-                    <div class="progress-fill" id="progressFill"></div>
-                </div>
-                <br><br>
-
-                <!-- Question 1 -->
-                <div class="question active" id="question1">
-                    <div class="question-header">
-                        <div class="question-number">Question 1 of 8</div>
-                        <div class="question-text">Tell me about your typical driving patterns...</div>
-                    </div>
-                    <div class="answer-options">
-                        <div class="answer-option" data-value="8000">
-                            <div class="option-label">🌅 Mostly local adventures</div>
-                            <div class="option-description">Coffee runs, errands, and nearby destinations (Under 10,000 miles yearly)</div>
-                        </div>
-                        <div class="answer-option" data-value="12000">
-                            <div class="option-label">🌿 A balanced lifestyle</div>
-                            <div class="option-description">Mix of daily life and weekend getaways (10,000 - 15,000 miles yearly)</div>
-                        </div>
-                        <div class="answer-option" data-value="18000">
-                            <div class="option-label">🌍 Always on the move</div>
-                            <div class="option-description">Regular longer journeys and active lifestyle (15,000 - 20,000 miles yearly)</div>
-                        </div>
-                        <div class="answer-option" data-value="25000">
-                            <div class="option-label">⚡ Constantly exploring</div>
-                            <div class="option-description">Frequent travel and extensive driving (Over 20,000 miles yearly)</div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Question 2 -->
-                <div class="question" id="question2">
-                    <div class="question-header">
-                        <div class="question-number">Question 2 of 8</div>
-                        <div class="question-text">What feels right for your vehicle investment?</div>
-                    </div>
-                    <div class="answer-options">
-                        <div class="answer-option" data-value="30000">
-                            <div class="option-label">💫 Thoughtful value</div>
-                            <div class="option-description">Quality that makes sense for your budget (Under $35,000)</div>
-                        </div>
-                        <div class="answer-option" data-value="42000">
-                            <div class="option-label">✨ Premium balance</div>
-                            <div class="option-description">The sweet spot of features and sophistication ($35,000 - $50,000)</div>
-                        </div>
-                        <div class="answer-option" data-value="60000">
-                            <div class="option-label">🎯 Elevated experience</div>
-                            <div class="option-description">Advanced technology and refined comfort ($50,000 - $70,000)</div>
-                        </div>
-                        <div class="answer-option" data-value="80000">
-                            <div class="option-label">👑 Uncompromising luxury</div>
-                            <div class="option-description">The finest without boundaries (Over $70,000)</div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Question 3 -->
-                <div class="question" id="question3">
-                    <div class="question-header">
-                        <div class="question-number">Question 3 of 8</div>
-                        <div class="question-text">How does charging fit into your daily life?</div>
-                    </div>
-                    <div class="answer-options">
-                        <div class="answer-option" data-value="yes-garage">
-                            <div class="option-label">🏡 Perfect setup</div>
-                            <div class="option-description">Ready for seamless overnight charging (Garage with dedicated charging)</div>
-                        </div>
-                        <div class="answer-option" data-value="yes-driveway">
-                            <div class="option-label">🌱 Comfortable access</div>
-                            <div class="option-description">Easy to arrange home charging solutions (Driveway or regular parking)</div>
-                        </div>
-                        <div class="answer-option" data-value="maybe">
-                            <div class="option-label">🏙️ Adaptable lifestyle</div>
-                            <div class="option-description">Willing to explore charging alternatives (Apartment with some options)</div>
-                        </div>
-                        <div class="answer-option" data-value="no">
-                            <div class="option-label">🌃 City rhythm</div>
-                            <div class="option-description">Comfortable with urban charging networks (Rely on public charging)</div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Question 4 -->
-                <div class="question" id="question4">
-                    <div class="question-header">
-                        <div class="question-number">Question 4 of 8</div>
-                        <div class="question-text">When you think about longer adventures...</div>
-                    </div>
-                    <div class="answer-options">
-                        <div class="answer-option" data-value="never">
-                            <div class="option-label">🌸 Local soul</div>
-                            <div class="option-description">You cherish nearby experiences (Rarely travel over 200 miles)</div>
-                        </div>
-                        <div class="answer-option" data-value="few-times">
-                            <div class="option-label">🍃 Occasional explorer</div>
-                            <div class="option-description">Planned trips with time to enjoy the journey (Few times per year)</div>
-                        </div>
-                        <div class="answer-option" data-value="monthly">
-                            <div class="option-label">🌲 Regular adventurer</div>
-                            <div class="option-description">Weekend getaways are part of your rhythm (Monthly excursions)</div>
-                        </div>
-                        <div class="answer-option" data-value="weekly">
-                            <div class="option-label">🗺️ Constant wanderer</div>
-                            <div class="option-description">Long distances are your natural habitat (Weekly or more)</div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Question 5 -->
-                <div class="question" id="question5">
-                    <div class="question-header">
-                        <div class="question-number">Question 5 of 8</div>
-                        <div class="question-text">What resonates most deeply with you?</div>
-                    </div>
-                    <div class="answer-options">
-                        <div class="answer-option" data-value="cost">
-                            <div class="option-label">💰 Mindful stewardship</div>
-                            <div class="option-description">Smart financial decisions that serve you well (Lowest total cost)</div>
-                        </div>
-                        <div class="answer-option" data-value="environment">
-                            <div class="option-label">🌍 Environmental harmony</div>
-                            <div class="option-description">Caring for the planet we share (Reducing your footprint)</div>
-                        </div>
-                        <div class="answer-option" data-value="convenience">
-                            <div class="option-label">⚡ Effortless freedom</div>
-                            <div class="option-description">Life should flow smoothly without constraints (Convenience and flexibility)</div>
-                        </div>
-                        <div class="answer-option" data-value="technology">
-                            <div class="option-label">🚀 Innovation embrace</div>
-                            <div class="option-description">Excitement for what's next and cutting-edge (Latest technology)</div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Question 6 -->
-                <div class="question" id="question6">
-                    <div class="question-header">
-                        <div class="question-number">Question 6 of 8</div>
-                        <div class="question-text">How long do you typically treasure a vehicle?</div>
-                    </div>
-                    <div class="answer-options">
-                        <div class="answer-option" data-value="3">
-                            <div class="option-label">🌟 Fresh perspectives</div>
-                            <div class="option-description">You enjoy experiencing the newest innovations (2-3 years)</div>
-                        </div>
-                        <div class="answer-option" data-value="5">
-                            <div class="option-label">🌿 Thoughtful ownership</div>
-                            <div class="option-description">The perfect balance of new and practical (4-6 years)</div>
-                        </div>
-                        <div class="answer-option" data-value="8">
-                            <div class="option-label">🌳 Lasting relationships</div>
-                            <div class="option-description">You appreciate growing with your choices (7-10 years)</div>
-                        </div>
-                        <div class="answer-option" data-value="12">
-                            <div class="option-label">🏛️ Timeless devotion</div>
-                            <div class="option-description">Quality that endures through life's changes (Over 10 years)</div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Question 7 -->
-                <div class="question" id="question7">
-                    <div class="question-header">
-                        <div class="question-number">Question 7 of 8</div>
-                        <div class="question-text">In your ideal world, which brings you the most joy?</div>
-                    </div>
-                    <div class="answer-options">
-                        <div class="answer-option" data-value="home-comfort">
-                            <div class="option-label">🏠 Peaceful mornings</div>
-                            <div class="option-description">The comfort of familiar routines (Starting each day from home)</div>
-                        </div>
-                        <div class="answer-option" data-value="spontaneous">
-                            <div class="option-label">⚡ Spontaneous freedom</div>
-                            <div class="option-description">Flexibility to go wherever inspiration calls (Ready for any adventure)</div>
-                        </div>
-                        <div class="answer-option" data-value="mindful">
-                            <div class="option-label">🌱 Mindful choices</div>
-                            <div class="option-description">Decisions that align with your values (Environmental consciousness)</div>
-                        </div>
-                        <div class="answer-option" data-value="premium">
-                            <div class="option-label">💎 Refined experiences</div>
-                            <div class="option-description">Life's details matter to you (Premium comfort and features)</div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Question 8 -->
-                <div class="question" id="question8">
-                    <div class="question-header">
-                        <div class="question-number">Question 8 of 8</div>
-                        <div class="question-text">When making important choices, you tend to...</div>
-                    </div>
-                    <div class="answer-options">
-                        <div class="answer-option" data-value="data-driven">
-                            <div class="option-label">📊 Trust the numbers</div>
-                            <div class="option-description">Thorough analysis brings you confidence (Data and calculations guide you)</div>
-                        </div>
-                        <div class="answer-option" data-value="intuitive">
-                            <div class="option-label">💖 Follow your intuition</div>
-                            <div class="option-description">Your heart knows what's right (Feelings and values lead)</div>
-                        </div>
-                        <div class="answer-option" data-value="expert-guidance">
-                            <div class="option-label">🤝 Seek wise counsel</div>
-                            <div class="option-description">Trusted advice enhances your decisions (Value expert guidance)</div>
-                        </div>
-                        <div class="answer-option" data-value="comprehensive">
-                            <div class="option-label">⚖️ Weigh all perspectives</div>
-                            <div class="option-description">Every angle deserves thoughtful attention (Comprehensive consideration)</div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Results -->
-                <div class="question" id="questionResults">
-                    <div class="question-header">
-                        <div class="question-number">Your Personal Analysis Complete</div>
-                        <div class="question-text">Here's what our free analysis suggests for your situation...</div>
-                    </div>
-                    <div id="recommendationResult">
-                        <!-- Results will be populated by JavaScript -->
-                    </div>
-                    <div class="upgrade-prompt">
-                        <h4>Want More Detailed Analysis?</h4>
-                        <p>This free analysis gives you a great starting point, but imagine having:</p>
-                        <ul>
-                            <li>🗺️ <strong>Charging stations analysis</strong> for your exact ZIP code</li>
-                            <li>💰 <strong>Local electricity rates</strong> and gas prices</li>
-                            <li>🚗 <strong>Specific vehicle recommendations</strong> that fit your budget</li>
-                            <li>📊 <strong>Detailed financial projections</strong> with tax incentives</li>
-                            <li>📋 <strong>Step-by-step action plan</strong> for your purchase</li>
-                        </ul>
-                        <div class="upgrade-cta">
-                            <a href="#pricing" class="cta-button-secondary">Get Your Complete Report - $79</a>
-                            <p class="upgrade-note">25-page personalized analysis delivered in 48 hours</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="question-navigation">
-                    <button class="nav-button" id="prevBtn" onclick="previousQuestion()" disabled>Previous</button>
-                    <button class="nav-button" id="nextBtn" onclick="nextQuestion()" disabled>Next</button>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Calculator Section -->
-    <section class="calculator-section">
-        <div class="section-container">
-            <a href="#calculator" class="back-button" onclick="showTools()">← Back to Calculator</a>
-            
-            <div class="section-header">
-                <h2 class="section-title">Cost Calculator</h2>
-                <p class="section-subtitle">
-                    Enter your specific details to get a personalized cost comparison.
-                </p>
-            </div>
-
-            <div class="calculator-wrapper">
-                <div class="calculator-grid">
-                    <div class="input-panel">
-                        <h3 class="panel-title">Your Details</h3>
-                        
-                        <div class="input-group">
-                            <label class="input-label">Electric Vehicle Price</label>
-                            <input type="number" id="evPrice" class="input-field" placeholder="35000" value="35000">
-                        </div>
-
-                        <div class="input-group">
-                            <label class="input-label">Gas Vehicle Price</label>
-                            <input type="number" id="gasPrice" class="input-field" placeholder="25000" value="25000">
-                        </div>
-
-                        <div class="input-group">
-                            <label class="input-label">Annual Mileage</label>
-                            <input type="number" id="annualMiles" class="input-field" placeholder="12000" value="12000">
-                        </div>
-
-                        <div class="input-group">
-                            <label class="input-label">Gas Price (per gallon)</label>
-                            <input type="number" id="gasPerGallon" class="input-field" placeholder="3.50" value="3.50" step="0.01">
-                        </div>
-
-                        <div class="input-group">
-                            <label class="input-label">Electricity Rate (per kWh)</label>
-                            <input type="number" id="electricityRate" class="input-field" placeholder="0.12" value="0.12" step="0.01">
-                        </div>
-
-                        <div class="input-group">
-                            <label class="input-label">Gas Vehicle MPG</label>
-                            <input type="number" id="gasMpg" class="input-field" placeholder="28" value="28">
-                        </div>
-
-                        <div class="input-group">
-                            <label class="input-label">EV Efficiency (mi/kWh)</label>
-                            <input type="number" id="evEfficiency" class="input-field" placeholder="3.5" value="3.5" step="0.1">
-                        </div>
-
-                        <div class="input-group">
-                            <label class="input-label">Analysis Period</label>
-                            <select id="years" class="input-field">
-                                <option value="3">3 years</option>
-                                <option value="5" selected>5 years</option>
-                                <option value="7">7 years</option>
-                                <option value="10">10 years</option>
-                            </select>
-                        </div>
-
-                        <button class="calculate-btn" onclick="calculateCosts()">Calculate Comparison</button>
-                    </div>
-
-                    <div class="results-panel">
-                        <h3 class="panel-title">Your Results</h3>
-                        
-                        <div id="savingsCard" class="results-summary">
-                            <h3>Total Savings with EV</h3>
-                            <div class="savings-amount">$0</div>
-                            <div class="savings-period">over 5 years</div>
-                        </div>
-
-                        <div class="comparison-grid">
-                            <div class="comparison-card ev-card">
-                                <h4>Electric Vehicle</h4>
-                                <div class="cost-amount" id="evTotal">$0</div>
-                            </div>
-                            <div class="comparison-card gas-card">
-                                <h4>Gas Vehicle</h4>
-                                <div class="cost-amount" id="gasTotal">$0</div>
-                            </div>
-                        </div>
-
-                        <div class="breakdown-section">
-                            <h4 class="breakdown-title">What's Included in Your $79 Report</h4>
-                            <div class="breakdown-grid">
-                                <div class="breakdown-column">
-                                    <h5>Free Calculator vs Full Report</h5>
-                                    <div class="breakdown-item">
-                                        <span>Basic cost comparison:</span>
-                                        <span>✓ Free</span>
-                                    </div>
-                                    <div class="breakdown-item">
-                                        <span>Location-specific analysis:</span>
-                                        <span>✓ $79 Report</span>
-                                    </div>
-                                    <div class="breakdown-item">
-                                        <span>Charging infrastructure map:</span>
-                                        <span>✓ $79 Report</span>
-                                    </div>
-                                    <div class="breakdown-item">
-                                        <span>Specific vehicle recommendations:</span>
-                                        <span>✓ $79 Report</span>
-                                    </div>
-                                </div>
-                                <div class="breakdown-column">
-                                    <h5>Ready for More Detail?</h5>
-                                    <div class="breakdown-item">
-                                        <span><a href="#pricing" style="color: var(--elegant-blue); text-decoration: none; font-weight: 600;">Get Your Complete Report →</a></span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="footer-container">
-            <div class="footer-content">
-                <p>&copy; 2025 plugorpump.com - Professional vehicle decision analysis</p>
-            </div>
-        </div>
-    </footer>
-
-    <script>
-        // Global variables
-        let currentQuestion = 1;
-        let questionnaireAnswers = {};
-        const totalQuestions = 8;
-
-        // Tool selection functions
-        function showQuestionnaire() {
-            document.querySelector('.tool-selection').style.display = 'none';
-            document.querySelector('.questionnaire-section').classList.add('active');
-            resetQuestionnaire();
-        }
-
-        function showCalculator() {
-            document.querySelector('.tool-selection').style.display = 'none';
-            document.querySelector('.calculator-section').classList.add('active');
-            calculateCosts();
-        }
-
-        function showTools() {
-            document.querySelector('.tool-selection').style.display = 'block';
-            document.querySelector('.questionnaire-section').classList.remove('active');
-            document.querySelector('.calculator-section').classList.remove('active');
-        }
-
-        // Questionnaire functions
-        function resetQuestionnaire() {
-            currentQuestion = 1;
-            questionnaireAnswers = {};
-            showQuestion(1);
-            updateProgress();
-            updateNavButtons();
-        }
-
-        function showQuestion(questionNum) {
-            // Hide all questions
-            document.querySelectorAll('.question').forEach(q => q.classList.remove('active'));
-            // Show current question
-            if (questionNum <= totalQuestions) {
-                document.getElementById(`question${questionNum}`).classList.add('active');
-            } else {
-                document.getElementById('questionResults').classList.add('active');
-            }
-        }
-
-        function updateProgress() {
-            const progress = ((currentQuestion - 1) / totalQuestions) * 100;
-            document.getElementById('progressFill').style.width = progress + '%';
-        }
-
-        function updateNavButtons() {
-            const prevBtn = document.getElementById('prevBtn');
-            const nextBtn = document.getElementById('nextBtn');
-            
-            prevBtn.disabled = currentQuestion === 1;
-            
-            if (currentQuestion <= totalQuestions) {
-                const hasAnswer = questionnaireAnswers[`question${currentQuestion}`];
-                nextBtn.disabled = !hasAnswer;
-                nextBtn.textContent = currentQuestion === totalQuestions ? 'See Results' : 'Next';
-            }
-        }
-
-        function nextQuestion() {
-            if (currentQuestion < totalQuestions) {
-                currentQuestion++;
-                showQuestion(currentQuestion);
-            } else {
-                // Show results
-                generateRecommendation();
-                currentQuestion++;
-                showQuestion('Results');
-                document.getElementById('nextBtn').style.display = 'none';
-            }
-            updateProgress();
-            updateNavButtons();
-        }
-
-        function previousQuestion() {
-            if (current        function previousQuestion() {
-            if (currentQuestion > 1) {
-                currentQuestion--;
-                showQuestion(currentQuestion);
-                if (currentQuestion <= totalQuestions) {
-                    document.getElementById('nextBtn').style.display = 'inline-block';
-                }
-                updateProgress();
-                updateNavButtons();
-            }
-        }
-
-        function generateRecommendation() {
-            const answers = questionnaireAnswers;
-            let evScore = 0;
-            let gasScore = 0;
-
-            // Enhanced scoring logic based on new elegant questions
-            
-            // Driving patterns (Question 1)
-            const mileage = parseInt(answers.question1);
-            if (mileage <= 12000) evScore += 2;
-            else if (mileage <= 18000) evScore += 1;
-            else gasScore += 1;
-
-            // Investment comfort (Question 2) 
-            const budget = parseInt(answers.question2);
-            if (budget >= 50000) evScore += 2; // Higher budgets often lean EV
-            else if (budget >= 35000) evScore += 1;
-
-            // Charging lifestyle (Question 3)
-            const charging = answers.question3;
-            if (charging === 'yes-garage') evScore += 3;
-            else if (charging === 'yes-driveway') evScore += 2;
-            else if (charging === 'maybe') evScore += 1;
-            else gasScore += 2;
-
-            // Adventure frequency (Question 4)
-            const trips = answers.question4;
-            if (trips === 'never') evScore += 2;
-            else if (trips === 'few-times') evScore += 1;
-            else gasScore += 2;
-
-            // Values alignment (Question 5)
-            const values = answers.question5;
-            if (values === 'environment' || values === 'technology') evScore += 2;
-            else if (values === 'convenience') gasScore += 2;
-
-            // Ownership duration (Question 6)
-            const ownership = parseInt(answers.question6);
-            if (ownership >= 5) evScore += 1;
-
-            // Lifestyle priorities (Question 7)
-            const lifestyle = answers.question7;
-            if (lifestyle === 'home-comfort' || lifestyle === 'mindful') evScore += 1;
-            else if (lifestyle === 'spontaneous') gasScore += 1;
-            else if (lifestyle === 'premium') evScore += 1;
-
-            // Decision style (Question 8)
-            const decisionStyle = answers.question8;
-            if (decisionStyle === 'data-driven') evScore += 1;
-            else if (decisionStyle === 'intuitive' && answers.question5 === 'environment') evScore += 1;
-
-            // Generate elegant recommendation
-            const resultDiv = document.getElementById('recommendationResult');
-            if (evScore > gasScore) {
-                resultDiv.innerHTML = `
-                    <div style="text-align: center; padding: 3rem; background: linear-gradient(135deg, var(--elegant-blue), var(--soft-blue)); color: white; border-radius: 15px; margin-bottom: 2rem;">
-                        <h3 style="font-size: 1.8rem; margin-bottom: 1rem; font-weight: 300;">⚡ Your Journey Points to Electric</h3>
-                        <p style="font-size: 1.2rem; margin-bottom: 1.5rem; opacity: 0.95; line-height: 1.6;">Based on your thoughtful responses, an electric vehicle beautifully aligns with your lifestyle and values. Your story suggests you're ready for this elegant transition.</p>
-                        <div style="font-size: 0.9rem; opacity: 0.8; font-style: italic;">Your personal harmony score: Electric ${evScore} • Traditional ${gasScore}</div>
-                    </div>
-                    <button class="tool-button" onclick="transferToCalculator()" style="width: 100%; font-size: 1rem; padding: 1.2rem;">See Your Numbers in Our Calculator</button>
-                    <div style="text-align: center; margin-top: 1rem;">
-                        <a href="#pricing" style="color: var(--elegant-blue); text-decoration: none; font-weight: 600;">
-                            Or Get Your Complete $79 Report with Local Analysis →
-                        </a>
-                    </div>
-                `;
-            } else if (gasScore > evScore) {
-                resultDiv.innerHTML = `
-                    <div style="text-align: center; padding: 3rem; background: linear-gradient(135deg, var(--warm-gray), #8b8a8a); color: white; border-radius: 15px; margin-bottom: 2rem;">
-                        <h3 style="font-size: 1.8rem; margin-bottom: 1rem; font-weight: 300;">🛣️ Your Path Suggests Traditional</h3>
-                        <p style="font-size: 1.2rem; margin-bottom: 1.5rem; opacity: 0.95; line-height: 1.6;">Your lifestyle and preferences indicate that a traditional vehicle would serve you best right now. This choice honors your current needs perfectly.</p>
-                        <div style="font-size: 0.9rem; opacity: 0.8; font-style: italic;">Your personal harmony score: Traditional ${gasScore} • Electric ${evScore}</div>
-                    </div>
-                    <button class="tool-button" onclick="transferToCalculator()" style="width: 100%; font-size: 1rem; padding: 1.2rem;">See Your Numbers in Our Calculator</button>
-                    <div style="text-align: center; margin-top: 1rem;">
-                        <a href="#pricing" style="color: var(--elegant-blue); text-decoration: none; font-weight: 600;">
-                            Or Get Your Complete $79 Report with Local Analysis →
-                        </a>
-                    </div>
-                `;
-            } else {
-                resultDiv.innerHTML = `
-                    <div style="text-align: center; padding: 3rem; background: linear-gradient(135deg, var(--accent-blue), var(--elegant-blue)); color: white; border-radius: 15px; margin-bottom: 2rem;">
-                        <h3 style="font-size: 1.8rem; margin-bottom: 1rem; font-weight: 300;">⚖️ A Beautiful Balance</h3>
-                        <p style="font-size: 1.2rem; margin-bottom: 1.5rem; opacity: 0.95; line-height: 1.6;">How wonderful—both paths could serve you well! Your answers reveal someone who would thrive with either choice. Let the numbers guide your final decision.</p>
-                        <div style="font-size: 0.9rem; opacity: 0.8; font-style: italic;">Your personal harmony: Perfectly balanced ${evScore} • ${gasScore}</div>
-                    </div>
-                    <button class="tool-button" onclick="transferToCalculator()" style="width: 100%; font-size: 1rem; padding: 1.2rem;">See Your Numbers in Our Calculator</button>
-                    <div style="text-align: center; margin-top: 1rem;">
-                        <a href="#pricing" style="color: var(--elegant-blue); text-decoration: none; font-weight: 600;">
-                            Or Get Your Complete $79 Report with Local Analysis →
-                        </a>
-                    </div>
-                `;
-            }
-        }
-
-        function transferToCalculator() {
-            // Transfer questionnaire data to calculator
-            const answers = questionnaireAnswers;
-            
-            if (answers.question1) {
-                document.getElementById('annualMiles').value = answers.question1;
-            }
-            if (answers.question2) {
-                const budget = parseInt(answers.question2);
-                document.getElementById('evPrice').value = Math.min(budget + 10000, 80000); // EV typically more expensive
-                document.getElementById('gasPrice').value = budget;
-            }
-            if (answers.question6) {
-                document.getElementById('years').value = answers.question6;
-            }
-
-            showCalculator();
-        }
-
-        // Calculator functions
-        function formatCurrency(amount) {
-            return new Intl.NumberFormat('en-US', {
-                style: 'currency',
-                currency: 'USD',
-                minimumFractionDigits: 0,
-                maximumFractionDigits: 0
-            }).format(amount);
-        }
-
-        function calculateCosts() {
-            // Get input values
-            const evPrice = parseFloat(document.getElementById('evPrice').value) || 0;
-            const gasPrice = parseFloat(document.getElementById('gasPrice').value) || 0;
-            const annualMiles = parseFloat(document.getElementById('annualMiles').value) || 0;
-            const gasPerGallon = parseFloat(document.getElementById('gasPerGallon').value) || 0;
-            const electricityRate = parseFloat(document.getElementById('electricityRate').value) || 0;
-            const gasMpg = parseFloat(document.getElementById('gasMpg').value) || 1;
-            const evEfficiency = parseFloat(document.getElementById('evEfficiency').value) || 1;
-            const years = parseInt(document.getElementById('years').value) || 5;
-
-            // Calculate annual fuel costs
-            const annualGasCost = (annualMiles / gasMpg) * gasPerGallon;
-            const annualElectricityCost = (annualMiles / evEfficiency) * electricityRate;
-
-            // Calculate maintenance costs (EVs typically cost 40% less to maintain)
-            const annualGasMaintenance = 1200; // Average annual maintenance for gas car
-            const annualEvMaintenance = 720;   // Average annual maintenance for EV
-
-            // Calculate total costs over the period
-            const totalEvCost = evPrice + (annualElectricityCost * years) + (annualEvMaintenance * years);
-            const totalGasCost = gasPrice + (annualGasCost * years) + (annualGasMaintenance * years);
-
-            const savings = totalGasCost - totalEvCost;
-
-            // Update the display
-            document.getElementById('evTotal').textContent = formatCurrency(totalEvCost);
-            document.getElementById('gasTotal').textContent = formatCurrency(totalGasCost);
-            document.querySelector('#savingsCard .savings-amount').textContent = formatCurrency(Math.abs(savings));
-            document.querySelector('#savingsCard .savings-period').textContent = `over ${years} years`;
-
-            // Update savings card styling based on which is cheaper
-            const savingsCard = document.getElementById('savingsCard');
-            if (savings > 0) {
-                savingsCard.querySelector('h3').textContent = 'Total Savings with EV';
-                savingsCard.style.background = 'linear-gradient(135deg, var(--success-green), #059669)';
-            } else {
-                savingsCard.querySelector('h3').textContent = 'Gas Car Costs Less';
-                savingsCard.style.background = 'linear-gradient(135deg, var(--warning-orange), #d97706)';
-            }
-        }
-
-        // Event listeners for answer selection
-        document.addEventListener('DOMContentLoaded', function() {
-            // Add click handlers for answer options
-            document.querySelectorAll('.answer-option').forEach(option => {
-                option.addEventListener('click', function() {
-                    const questionDiv = this.closest('.question');
-                    const questionId = questionDiv.id;
-                    
-                    // Remove selected class from all options in this question
-                    questionDiv.querySelectorAll('.answer-option').forEach(opt => {
-                        opt.classList.remove('selected');
-                    });
-                    
-                    // Add selected class to clicked option
-                    this.classList.add('selected');
-                    
-                    // Store the answer
-                    questionnaireAnswers[questionId] = this.dataset.value;
-                    
-                    // Update navigation buttons
-                    updateNavButtons();
-                });
-            });
-
-            // Smooth scrolling for navigation
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    const target = document.querySelector(this.getAttribute('href'));
-                    if (target) {
-                        target.scrollIntoView({
-                            behavior: 'smooth',
-                            block: 'start'
-                        });
-                    }
-                });
-            });
-
-            // Calculate initial values
-            calculateCosts();
-        });
-    </script>
-</body>
-</html><!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Plug or Pump - Professional Vehicle Decision Reports</title>
     <meta name="description" content="Get professional vehicle decision analysis for $79. Compare EV vs gas with personalized reports including financial projections and location-specific data.">
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Clash+Grotesk:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary-black: #2c3e50;
@@ -908,7 +33,7 @@
         }
 
         body {
-            font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-family: 'Clash Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
             line-height: 1.5;
             color: var(--text-primary);
             background: var(--white);
@@ -1025,63 +150,36 @@
             font-size: 1.5rem;
         }
 
-        .hero-cta {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-
-        .cta-button-primary {
-            display: inline-block;
-            background: linear-gradient(135deg, var(--white) 0%, #f8f9fa 100%);
-            color: var(--elegant-blue);
-            padding: 1.2rem 2.5rem;
-            border: 2px solid var(--elegant-blue);
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            box-shadow: 0 4px 15px rgba(108, 139, 204, 0.2);
-        }
-
-        .cta-button-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(108, 139, 204, 0.3);
-            background: var(--white);
-        }
-
-        .cta-button-secondary {
-            display: inline-block;
-            background: linear-gradient(135deg, var(--elegant-blue) 0%, var(--accent-blue) 100%);
-            color: var(--white);
-            padding: 1.2rem 2.5rem;
-            border: 2px solid transparent;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            box-shadow: 0 4px 15px rgba(108, 139, 204, 0.4);
-        }
-
-        .cta-button-secondary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(108, 139, 204, 0.5);
-            background: linear-gradient(135deg, var(--accent-blue) 0%, var(--soft-blue) 100%);
-        }
-
         /* How It Works Section */
         .how-it-works {
             padding: 80px 0;
             background: var(--white);
+        }
+
+        .tools-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .tools-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .tools-title {
+            font-size: 2.5rem;
+            font-weight: 300;
+            margin-bottom: 1rem;
+            color: var(--elegant-blue);
+            letter-spacing: -0.025em;
+        }
+
+        .tools-subtitle {
+            font-size: 1.125rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
         }
 
         .process-grid {
@@ -1235,561 +333,6 @@
             color: var(--white);
         }
 
-        .comparison-note {
-            text-align: center;
-            margin-top: 3rem;
-            padding: 2rem;
-            background: rgba(108, 139, 204, 0.1);
-            border-radius: 12px;
-            border-left: 4px solid var(--elegant-blue);
-        }
-
-        .comparison-note p {
-            color: var(--text-secondary);
-            font-style: italic;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        /* Tool Selection */
-        .tool-selection {
-            padding: 80px 0;
-            background: var(--light-gray);
-        }
-
-        .tools-container {
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
-
-        .tools-header {
-            text-align: center;
-            margin-bottom: 3rem;
-        }
-
-        .tools-title {
-            font-size: 2.5rem;
-            font-weight: 300;
-            margin-bottom: 1rem;
-            color: var(--elegant-blue);
-            letter-spacing: -0.025em;
-        }
-
-        .tools-subtitle {
-            font-size: 1.125rem;
-            color: var(--text-secondary);
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        .tools-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 2rem;
-        }
-
-        .tool-card {
-            background: var(--white);
-            border: 1px solid var(--border-light);
-            border-radius: 8px;
-            padding: 3rem;
-            text-align: center;
-            transition: all 0.3s ease;
-            cursor: pointer;
-        }
-
-        .tool-card:hover {
-            border-color: var(--accent-blue);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
-        }
-
-        .tool-card h3 {
-            font-size: 1.5rem;
-            font-weight: 500;
-            margin-bottom: 1rem;
-            color: var(--elegant-blue);
-        }
-
-        .tool-card p {
-            color: var(--text-secondary);
-            line-height: 1.6;
-            margin-bottom: 2rem;
-            font-size: 0.9375rem;
-        }
-
-        .tool-button {
-            display: inline-block;
-            background: linear-gradient(135deg, var(--elegant-blue) 0%, var(--accent-blue) 100%);
-            color: var(--white);
-            padding: 0.875rem 2rem;
-            border: none;
-            border-radius: 4px;
-            text-decoration: none;
-            font-weight: 500;
-            font-size: 0.875rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            letter-spacing: 0.025em;
-            text-transform: uppercase;
-            box-shadow: 0 4px 15px rgba(108, 139, 204, 0.3);
-        }
-
-        .tool-button:hover {
-            background: linear-gradient(135deg, var(--accent-blue) 0%, var(--soft-blue) 100%);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(108, 139, 204, 0.4);
-        }
-
-        .calculator-note {
-            text-align: center;
-            margin-top: 2rem;
-            padding: 1.5rem;
-            background: rgba(108, 139, 204, 0.1);
-            border-radius: 8px;
-            border-left: 4px solid var(--elegant-blue);
-        }
-
-        .calculator-note p {
-            color: var(--text-secondary);
-            margin: 0;
-        }
-
-        .calculator-note a {
-            color: var(--elegant-blue);
-            text-decoration: none;
-            font-weight: 600;
-        }
-
-        .calculator-note a:hover {
-            text-decoration: underline;
-        }
-
-        /* Hidden Sections */
-        .questionnaire-section,
-        .calculator-section {
-            padding: 80px 0;
-            background: var(--white);
-            display: none;
-        }
-
-        .questionnaire-section.active,
-        .calculator-section.active {
-            display: block;
-        }
-
-        .section-container {
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
-
-        .back-button {
-            display: inline-flex;
-            align-items: center;
-            color: var(--text-secondary);
-            text-decoration: none;
-            font-size: 0.875rem;
-            margin-bottom: 2rem;
-            transition: color 0.3s ease;
-        }
-
-        .back-button:hover {
-            color: var(--text-primary);
-        }
-
-        .section-header {
-            text-align: center;
-            margin-bottom: 3rem;
-        }
-
-        .section-title {
-            font-size: 2.5rem;
-            font-weight: 300;
-            margin-bottom: 1rem;
-            color: var(--elegant-blue);
-            letter-spacing: -0.025em;
-        }
-
-        .section-subtitle {
-            font-size: 1.125rem;
-            color: var(--text-secondary);
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        /* Questionnaire Styles */
-        .questionnaire-card {
-            background: var(--white);
-            border: 1px solid var(--border-light);
-            border-radius: 8px;
-            padding: 3rem;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .question {
-            display: none;
-        }
-
-        .question.active {
-            display: block;
-        }
-
-        .question-header {
-            margin-bottom: 2rem;
-        }
-
-        .question-number {
-            font-size: 0.875rem;
-            color: var(--text-light);
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            margin-bottom: 0.5rem;
-        }
-
-        .question-text {
-            font-size: 1.5rem;
-            font-weight: 400;
-            color: var(--text-primary);
-            line-height: 1.4;
-        }
-
-        .answer-options {
-            display: grid;
-            gap: 1rem;
-            margin-bottom: 2rem;
-        }
-
-        .answer-option {
-            padding: 1.25rem;
-            border: 1px solid var(--border-light);
-            border-radius: 4px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            background: var(--white);
-        }
-
-        .answer-option:hover {
-            border-color: var(--accent-blue);
-            background: #f8f9ff;
-        }
-
-        .answer-option.selected {
-            border-color: var(--accent-blue);
-            background: #f0f4ff;
-        }
-
-        .option-label {
-            font-weight: 500;
-            color: var(--text-primary);
-            margin-bottom: 0.25rem;
-        }
-
-        .option-description {
-            font-size: 0.875rem;
-            color: var(--text-secondary);
-        }
-
-        .question-navigation {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .nav-button {
-            background: linear-gradient(135deg, var(--elegant-blue) 0%, var(--accent-blue) 100%);
-            color: var(--white);
-            border: none;
-            padding: 0.875rem 1.5rem;
-            border-radius: 4px;
-            font-size: 0.875rem;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-transform: uppercase;
-            letter-spacing: 0.025em;
-            font-family: 'Space Grotesk', sans-serif;
-            box-shadow: 0 4px 15px rgba(108, 139, 204, 0.3);
-        }
-
-        .nav-button:hover {
-            background: linear-gradient(135deg, var(--accent-blue) 0%, var(--soft-blue) 100%);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(108, 139, 204, 0.4);
-        }
-
-        .nav-button:disabled {
-            background: var(--border-light);
-            color: var(--text-light);
-            cursor: not-allowed;
-            transform: none;
-            box-shadow: none;
-        }
-
-        .progress-bar {
-            width: 100%;
-            height: 4px;
-            background: var(--border-light);
-            border-radius: 2px;
-            overflow: hidden;
-        }
-
-        .progress-fill {
-            height: 100%;
-            background: var(--accent-blue);
-            transition: width 0.3s ease;
-            width: 0%;
-        }
-
-        .upgrade-prompt {
-            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-            border-radius: 12px;
-            padding: 2rem;
-            margin-top: 2rem;
-            border-left: 4px solid var(--elegant-blue);
-        }
-
-        .upgrade-prompt h4 {
-            color: var(--elegant-blue);
-            font-size: 1.3rem;
-            margin-bottom: 1rem;
-            font-weight: 500;
-        }
-
-        .upgrade-prompt p {
-            color: var(--text-secondary);
-            margin-bottom: 1rem;
-        }
-
-        .upgrade-prompt ul {
-            list-style: none;
-            padding: 0;
-            margin: 1.5rem 0;
-        }
-
-        .upgrade-prompt li {
-            padding: 0.5rem 0;
-            color: var(--text-secondary);
-            border-bottom: 1px solid #dee2e6;
-        }
-
-        .upgrade-prompt li:last-child {
-            border-bottom: none;
-        }
-
-        .upgrade-cta {
-            text-align: center;
-            margin-top: 2rem;
-        }
-
-        .upgrade-note {
-            font-size: 0.875rem;
-            color: var(--text-light);
-            margin-top: 0.5rem;
-            font-style: italic;
-        }
-
-        /* Calculator Styles */
-        .calculator-wrapper {
-            background: var(--white);
-            border: 1px solid var(--border-light);
-            border-radius: 8px;
-            overflow: hidden;
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-
-        .calculator-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-        }
-
-        .input-panel {
-            padding: 3rem;
-            border-right: 1px solid var(--border-light);
-        }
-
-        .results-panel {
-            padding: 3rem;
-            background: var(--light-gray);
-        }
-
-        .panel-title {
-            font-size: 1.25rem;
-            font-weight: 500;
-            margin-bottom: 2rem;
-            color: var(--text-primary);
-        }
-
-        .input-group {
-            margin-bottom: 1.5rem;
-        }
-
-        .input-label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 500;
-            color: var(--text-primary);
-            font-size: 0.875rem;
-        }
-
-        .input-field {
-            width: 100%;
-            padding: 0.875rem;
-            border: 1px solid var(--border-light);
-            border-radius: 4px;
-            font-size: 0.9375rem;
-            background: var(--white);
-            transition: border-color 0.3s ease;
-            font-family: inherit;
-        }
-
-        .input-field:focus {
-            outline: none;
-            border-color: var(--accent-blue);
-        }
-
-        .calculate-btn {
-            width: 100%;
-            padding: 1rem;
-            background: linear-gradient(135deg, var(--elegant-blue) 0%, var(--accent-blue) 100%);
-            color: var(--white);
-            border: none;
-            border-radius: 4px;
-            font-size: 0.875rem;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            margin-top: 1rem;
-            font-family: 'Space Grotesk', sans-serif;
-            text-transform: uppercase;
-            letter-spacing: 0.025em;
-            box-shadow: 0 4px 15px rgba(108, 139, 204, 0.3);
-        }
-
-        .calculate-btn:hover {
-            background: linear-gradient(135deg, var(--accent-blue) 0%, var(--soft-blue) 100%);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(108, 139, 204, 0.4);
-        }
-
-        /* Results */
-        .results-summary {
-            background: var(--primary-black);
-            color: var(--white);
-            padding: 2rem;
-            border-radius: 4px;
-            text-align: center;
-            margin-bottom: 2rem;
-        }
-
-        .results-summary h3 {
-            font-size: 0.875rem;
-            font-weight: 500;
-            margin-bottom: 0.5rem;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            opacity: 0.8;
-        }
-
-        .savings-amount {
-            font-size: 2.5rem;
-            font-weight: 300;
-            margin-bottom: 0.25rem;
-        }
-
-        .savings-period {
-            font-size: 0.875rem;
-            opacity: 0.7;
-        }
-
-        .comparison-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1rem;
-            margin-bottom: 2rem;
-        }
-
-        .comparison-card {
-            padding: 1.5rem;
-            border: 1px solid var(--border-light);
-            border-radius: 4px;
-            text-align: center;
-            background: var(--white);
-        }
-
-        .ev-card {
-            border-left: 4px solid var(--electric-blue);
-        }
-
-        .gas-card {
-            border-left: 4px solid var(--gas-orange);
-        }
-
-        .comparison-card h4 {
-            font-size: 0.75rem;
-            font-weight: 500;
-            margin-bottom: 0.5rem;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            color: var(--text-secondary);
-        }
-
-        .cost-amount {
-            font-size: 1.5rem;
-            font-weight: 400;
-            color: var(--text-primary);
-        }
-
-        .breakdown-section {
-            background: var(--white);
-            border: 1px solid var(--border-light);
-            border-radius: 4px;
-            padding: 1.5rem;
-        }
-
-        .breakdown-title {
-            font-size: 0.875rem;
-            font-weight: 500;
-            margin-bottom: 1rem;
-            color: var(--text-primary);
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
-
-        .breakdown-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1.5rem;
-        }
-
-        .breakdown-column h5 {
-            font-size: 0.75rem;
-            font-weight: 500;
-            margin-bottom: 0.75rem;
-            color: var(--text-secondary);
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
-
-        .breakdown-item {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 0.5rem;
-            font-size: 0.875rem;
-        }
-
-        .breakdown-item span:first-child {
-            color: var(--text-secondary);
-        }
-
-        .breakdown-item span:last-child {
-            color: var(--text-primary);
-            font-weight: 500;
-        }
-
         /* Footer */
         .footer {
             background: var(--primary-black);
@@ -1820,11 +363,6 @@
                 gap: 1rem;
             }
 
-            .hero-cta {
-                flex-direction: column;
-                gap: 1rem;
-            }
-
             .process-grid {
                 grid-template-columns: 1fr;
                 gap: 2rem;
@@ -1837,24 +375,6 @@
 
             .pricing-card-featured {
                 transform: none;
-            }
-
-            .tools-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .calculator-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .input-panel {
-                border-right: none;
-                border-bottom: 1px solid var(--border-light);
-            }
-
-            .comparison-grid,
-            .breakdown-grid {
-                grid-template-columns: 1fr;
             }
 
             .hero-content h1 {
@@ -1876,3 +396,172 @@
             text-align: center;
         }
     </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#home" class="logo">
+                plugorpump.com
+            </a>
+            <ul class="nav-menu">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#how-it-works">How It Works</a></li>
+                <li><a href="#pricing">Pricing</a></li>
+                <li><a href="#calculator">Free Calculator</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-container">
+            <div class="hero-content">
+                <h1>Stop Guessing About Your Vehicle Decision</h1>
+                <p class="hero-subtitle">
+                    Get a professional-grade vehicle decision report for $79 — the same analysis consultants charge $2,000+ for
+                </p>
+                <div class="hero-value-props">
+                    <div class="value-prop">
+                        <span class="value-icon">📊</span>
+                        <span>25-page personalized analysis</span>
+                    </div>
+                    <div class="value-prop">
+                        <span class="value-icon">🗺️</span>
+                        <span>Location-specific charging data</span>
+                    </div>
+                    <div class="value-prop">
+                        <span class="value-icon">💰</span>
+                        <span>10-year financial projections</span>
+                    </div>
+                    <div class="value-prop">
+                        <span class="value-icon">🚗</span>
+                        <span>Specific vehicle recommendations</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section id="how-it-works" class="how-it-works">
+        <div class="tools-container">
+            <div class="tools-header">
+                <h2 class="tools-title">How It Works</h2>
+                <p class="tools-subtitle">
+                    Get professional-grade vehicle analysis in three simple steps
+                </p>
+            </div>
+            
+            <div class="process-grid">
+                <div class="process-step">
+                    <div class="step-number">1</div>
+                    <h3>Try Our Free Calculator</h3>
+                    <p>Get a taste of our analysis with our sophisticated calculator. See potential savings and get basic recommendations.</p>
+                </div>
+                
+                <div class="process-step">
+                    <div class="step-number">2</div>
+                    <h3>Order Your Personal Report</h3>
+                    <p>Answer 20 detailed questions about your specific situation, location, and preferences. We analyze your unique needs.</p>
+                </div>
+
+                <div class="process-step">
+                    <div class="step-number">3</div>
+                    <h3>Receive Expert Analysis</h3>
+                    <p>Get your 25-page personalized report within 48 hours, with specific vehicle recommendations and financial projections.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="pricing-section">
+        <div class="tools-container">
+            <div class="tools-header">
+                <h2 class="tools-title">Simple, Transparent Pricing</h2>
+                <p class="tools-subtitle">
+                    Professional vehicle analysis at a fraction of consultant prices
+                </p>
+            </div>
+            
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <div class="pricing-header">
+                        <h3>Free Calculator</h3>
+                        <div class="price">$0</div>
+                        <p>Try our analysis</p>
+                    </div>
+                    <div class="pricing-features">
+                        <div class="feature">✓ Basic EV vs Gas comparison</div>
+                        <div class="feature">✓ 5-year cost projection</div>
+                        <div class="feature">✓ Simple recommendations</div>
+                        <div class="feature">✓ No commitment required</div>
+                    </div>
+                    <a href="#calculator" class="pricing-button pricing-button-outline">Try Free Calculator</a>
+                </div>
+
+                <div class="pricing-card pricing-card-featured">
+                    <div class="pricing-badge">Most Popular</div>
+                    <div class="pricing-header">
+                        <h3>Personal Report</h3>
+                        <div class="price">$79</div>
+                        <p>Comprehensive analysis</p>
+                    </div>
+                    <div class="pricing-features">
+                        <div class="feature">✓ 25-page personalized report</div>
+                        <div class="feature">✓ Location-specific charging analysis</div>
+                        <div class="feature">✓ 5, 7, 10-year projections</div>
+                        <div class="feature">✓ Specific vehicle recommendations</div>
+                        <div class="feature">✓ Local incentives analysis</div>
+                        <div class="feature">✓ 48-hour delivery</div>
+                    </div>
+                    <a href="#order" class="pricing-button">Get Your Report</a>
+                </div>
+
+                <div class="pricing-card">
+                    <div class="pricing-header">
+                        <h3>Additional Reports</h3>
+                        <div class="price">$10</div>
+                        <p>Each additional scenario</p>
+                    </div>
+                    <div class="pricing-features">
+                        <div class="feature">✓ Different family size</div>
+                        <div class="feature">✓ Alternative location</div>
+                        <div class="feature">✓ Different budget range</div>
+                        <div class="feature">✓ Future scenario planning</div>
+                    </div>
+                    <a href="#order" class="pricing-button pricing-button-outline">Add Scenarios</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-content">
+                <p>&copy; 2025 plugorpump.com - Professional vehicle decision analysis</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

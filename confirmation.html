@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Confirmation - Plug or Pump</title>
+    <meta name="description" content="Your vehicle analysis order has been received. You'll receive your personalized report within 48 hours.">
+    <link href="https://fonts.googleapis.com/css2?family=Clash+Grotesk:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-black: #2c3e50;
+            --secondary-gray: #5c6b7d;
+            --light-gray: #f8fafb;
+            --border-light: #e8ecf0;
+            --white: #ffffff;
+            --text-primary: #2c3e50;
+            --text-secondary: #5c6b7d;
+            --text-light: #8a95a3;
+            --accent-blue: #4a90e2;
+            --success-green: #00a652;
+            --warning-orange: #ff6100;
+            --electric-blue: #5ba8f5;
+            --gas-orange: #ff6b35;
+            --elegant-blue: #6c8bcc;
+            --soft-blue: #a4c2f7;
+            --warm-gray: #6b7280;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Clash Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.5;
+            color: var(--text-primary);
+            background: var(--light-gray);
+            font-weight: 400;
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-light);
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 1.125rem;
+            font-weight: 500;
+            color: var(--text-primary);
+            text-decoration: none;
+            letter-spacing: -0.025em;
+        }
+
+        /* Main Content */
+        .main-content {
+            padding: 120px 0 80px;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            text-align: center;
+        }
+
+        .success-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--success-green) 0%, #00d967 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 2rem;
+            font-size: 2rem;
+            color: white;
+        }
+
+        .confirmation-header h1 {
+            font-size: 2.5rem;
+            font-weight: 300;
+            margin-bottom: 1rem;
+            color: var(--elegant-blue);
+            letter-spacing: -0.025em;
+        }
+
+        .confirmation-header p {
+            font-size: 1.125rem;
+            color: var(--text-secondary);
+            margin-bottom: 3rem;
+        }
+
+        .confirmation-details {
+            background: var(--white);
+            border-radius: 12px;
+            padding: 2.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            text-align: left;
+        }
+
+        .detail-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .detail-row:last-child {
+            margin-bottom: 0;
+            border-bottom: none;
+        }
+
+        .detail-label {
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+
+        .detail-value {
+            color: var(--text-secondary);
+        }
+
+        .next-steps {
+            background: var(--white);
+            border-radius: 12px;
+            padding: 2.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            text-align: left;
+        }
+
+        .next-steps h3 {
+            color: var(--elegant-blue);
+            margin-bottom: 1.5rem;
+            font-size: 1.25rem;
+        }
+
+        .step-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 1.5rem;
+            gap: 1rem;
+        }
+
+        .step-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .step-number {
+            width: 30px;
+            height: 30px;
+            background: linear-gradient(135deg, var(--elegant-blue) 0%, var(--accent-blue) 100%);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 0.875rem;
+            flex-shrink: 0;
+        }
+
+        .step-content {
+            flex: 1;
+        }
+
+        .step-title {
+            font-weight: 500;
+            color: var(--text-primary);
+            margin-bottom: 0.25rem;
+        }
+
+        .step-description {
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .action-button {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+            min-width: 150px;
+        }
+
+        .action-button.primary {
+            background: linear-gradient(135deg, var(--elegant-blue) 0%, var(--accent-blue) 100%);
+            color: var(--white);
+        }
+
+        .action-button.primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(108, 139, 204, 0.4);
+        }
+
+        .action-button.secondary {
+            background: var(--white);
+            color: var(--text-secondary);
+            border: 2px solid var(--border-light);
+        }
+
+        .action-button.secondary:hover {
+            border-color: var(--elegant-blue);
+            color: var(--elegant-blue);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .confirmation-details,
+            .next-steps {
+                padding: 2rem;
+            }
+
+            .confirmation-header h1 {
+                font-size: 2rem;
+            }
+
+            .action-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .action-button {
+                width: 100%;
+                max-width: 250px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="./index.html" class="logo">
+                plugorpump.com
+            </a>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <div class="container">
+            <div class="confirmation-header">
+                <div class="success-icon">✓</div>
+                <h1>Order Confirmed!</h1>
+                <p>Thank you for choosing plugorpump.com. We've received your order and questionnaire responses.</p>
+            </div>
+
+            <div class="confirmation-details">
+                <div class="detail-row">
+                    <span class="detail-label">Order Number:</span>
+                    <span class="detail-value" id="order-number">POP-2025-001</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Package:</span>
+                    <span class="detail-value" id="package-type">Personal Report ($79)</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Email:</span>
+                    <span class="detail-value" id="customer-email">your.email@example.com</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Estimated Delivery:</span>
+                    <span class="detail-value" id="delivery-date">Within 48 hours</span>
+                </div>
+            </div>
+
+            <div class="next-steps">
+                <h3>What happens next?</h3>
+                
+                <div class="step-item">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <div class="step-title">Order Processing</div>
+                        <div class="step-description">We'll review your questionnaire responses and begin analyzing your specific situation.</div>
+                    </div>
+                </div>
+                
+                <div class="step-item">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <div class="step-title">Data Analysis</div>
+                        <div class="step-description">Our team will research location-specific charging options, local incentives, and vehicle recommendations.</div>
+                    </div>
+                </div>
+                
+                <div class="step-item">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <div class="step-title">Report Generation</div>
+                        <div class="step-description">Your personalized 25-page report will be compiled with financial projections and specific recommendations.</div>
+                    </div>
+                </div>
+                
+                <div class="step-item">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <div class="step-title">Delivery</div>
+                        <div class="step-description">We'll email your complete report within 48 hours, along with a summary of key findings.</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="action-buttons">
+                <a href="./index.html" class="action-button secondary">Return Home</a>
+                <a href="./vehicle-calculator.html" class="action-button primary">Try Calculator</a>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Load and display order details
+        document.addEventListener('DOMContentLoaded', function() {
+            const submissionData = JSON.parse(localStorage.getItem('completeSubmission') || '{}');
+            
+            if (submissionData.order) {
+                // Update order details
+                if (submissionData.order.email) {
+                    document.getElementById('customer-email').textContent = submissionData.order.email;
+                }
+                
+                if (submissionData.order.package) {
+                    const packageName = submissionData.order.package === 'personal-report' ? 'Personal Report ($79)' : 'Additional Scenario ($10)';
+                    document.getElementById('package-type').textContent = packageName;
+                }
+                
+                // Generate order number (in real implementation, this would come from your backend)
+                const orderNumber = 'POP-' + new Date().getFullYear() + '-' + Math.random().toString(36).substr(2, 9).toUpperCase();
+                document.getElementById('order-number').textContent = orderNumber;
+                
+                // Calculate delivery date
+                const deliveryDate = new Date();
+                deliveryDate.setDate(deliveryDate.getDate() + 2);
+                document.getElementById('delivery-date').textContent = 'By ' + deliveryDate.toLocaleDateString('en-US', { 
+                    weekday: 'long', 
+                    year: 'numeric', 
+                    month: 'long', 
+                    day: 'numeric' 
+                });
+            }
+            
+            // In a real implementation, you would send this data to your backend here
+            console.log('Complete submission data:', submissionData);
+            
+            // Clear the stored data after displaying confirmation
+            // localStorage.removeItem('orderData');
+            // localStorage.removeItem('completeSubmission');
+        });
+    </script>
+</body>
+</html>

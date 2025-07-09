@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Your Personal Report - Plug or Pump</title>
+    <meta name="description" content="Order your professional vehicle decision analysis report for $79. Get personalized recommendations within 48 hours.">
+    <link href="https://fonts.googleapis.com/css2?family=Clash+Grotesk:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-black: #2c3e50;
+            --secondary-gray: #5c6b7d;
+            --light-gray: #f8fafb;
+            --border-light: #e8ecf0;
+            --white: #ffffff;
+            --text-primary: #2c3e50;
+            --text-secondary: #5c6b7d;
+            --text-light: #8a95a3;
+            --accent-blue: #4a90e2;
+            --success-green: #00a652;
+            --warning-orange: #ff6100;
+            --electric-blue: #5ba8f5;
+            --gas-orange: #ff6b35;
+            --elegant-blue: #6c8bcc;
+            --soft-blue: #a4c2f7;
+            --warm-gray: #6b7280;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Clash Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.5;
+            color: var(--text-primary);
+            background: var(--light-gray);
+            font-weight: 400;
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-light);
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 1.125rem;
+            font-weight: 500;
+            color: var(--text-primary);
+            text-decoration: none;
+            letter-spacing: -0.025em;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-menu a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 400;
+            font-size: 0.875rem;
+            transition: color 0.3s ease;
+            letter-spacing: 0.025em;
+        }
+
+        .nav-menu a:hover {
+            color: var(--text-primary);
+        }
+
+        /* Main Content */
+        .main-content {
+            padding: 120px 0 80px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .order-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .order-header h1 {
+            font-size: 2.5rem;
+            font-weight: 300;
+            margin-bottom: 1rem;
+            color: var(--elegant-blue);
+            letter-spacing: -0.025em;
+        }
+
+        .order-header p {
+            font-size: 1.125rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Order Form */
+        .order-form {
+            background: var(--white);
+            border-radius: 12px;
+            padding: 3rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+        }
+
+        .form-section {
+            margin-bottom: 2.5rem;
+        }
+
+        .form-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .section-title {
+            font-size: 1.25rem;
+            font-weight: 500;
+            color: var(--elegant-blue);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--border-light);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid var(--border-light);
+            border-radius: 8px;
+            font-size: 1rem;
+            font-family: inherit;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--elegant-blue);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        /* Package Selection */
+        .package-selection {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .package-option {
+            border: 2px solid var(--border-light);
+            border-radius: 8px;
+            padding: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .package-option:hover {
+            border-color: var(--elegant-blue);
+        }
+
+        .package-option.selected {
+            border-color: var(--elegant-blue);
+            background: rgba(108, 139, 204, 0.05);
+        }
+
+        .package-option input[type="radio"] {
+            display: none;
+        }
+
+        .package-title {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--elegant-blue);
+            margin-bottom: 0.5rem;
+        }
+
+        .package-price {
+            font-size: 2rem;
+            font-weight: 300;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .package-description {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+        }
+
+        /* Order Summary */
+        .order-summary {
+            background: var(--light-gray);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+        }
+
+        .summary-row.total {
+            font-weight: 600;
+            font-size: 1.125rem;
+            padding-top: 0.5rem;
+            border-top: 2px solid var(--border-light);
+            margin-top: 1rem;
+            margin-bottom: 0;
+        }
+
+        /* Submit Button */
+        .submit-button {
+            width: 100%;
+            background: linear-gradient(135deg, var(--elegant-blue) 0%, var(--accent-blue) 100%);
+            color: var(--white);
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .submit-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(108, 139, 204, 0.4);
+        }
+
+        /* Security Notice */
+        .security-notice {
+            background: var(--white);
+            border-radius: 8px;
+            padding: 1.5rem;
+            text-align: center;
+            border: 1px solid var(--border-light);
+        }
+
+        .security-notice p {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+        }
+
+        .security-notice .trust-badges {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .trust-badge {
+            padding: 0.25rem 0.75rem;
+            background: var(--success-green);
+            color: white;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+
+            .order-form {
+                padding: 2rem;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .package-selection {
+                grid-template-columns: 1fr;
+            }
+
+            .order-header h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="./index.html" class="logo">
+                plugorpump.com
+            </a>
+            <ul class="nav-menu">
+                <li><a href="./index.html">Home</a></li>
+                <li><a href="./index.html#how-it-works">How It Works</a></li>
+                <li><a href="./index.html#pricing">Pricing</a></li>
+                <li><a href="./vehicle-calculator.html">Free Calculator</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <div class="container">
+            <div class="order-header">
+                <h1>Order Your Personal Report</h1>
+                <p>Get professional vehicle decision analysis tailored to your specific situation. Complete your order and we'll send you a detailed questionnaire.</p>
+            </div>
+
+            <form class="order-form" id="orderForm">
+                <!-- Package Selection -->
+                <div class="form-section">
+                    <h2 class="section-title">Choose Your Package</h2>
+                    <div class="package-selection">
+                        <label class="package-option selected" for="personal-report">
+                            <input type="radio" name="package" value="personal-report" id="personal-report" checked>
+                            <div class="package-title">Personal Report</div>
+                            <div class="package-price">$79</div>
+                            <div class="package-description">25-page comprehensive analysis</div>
+                        </label>
+                        <label class="package-option" for="additional-scenario">
+                            <input type="radio" name="package" value="additional-scenario" id="additional-scenario">
+                            <div class="package-title">Additional Scenario</div>
+                            <div class="package-price">$10</div>
+                            <div class="package-description">Extra scenario analysis</div>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Customer Information -->
+                <div class="form-section">
+                    <h2 class="section-title">Your Information</h2>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="firstName">First Name *</label>
+                            <input type="text" id="firstName" name="firstName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="lastName">Last Name *</label>
+                            <input type="text" id="lastName" name="lastName" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email Address *</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone Number</label>
+                        <input type="tel" id="phone" name="phone">
+                    </div>
+                </div>
+
+                <!-- Quick Context -->
+                <div class="form-section">
+                    <h2 class="section-title">Quick Context (Optional)</h2>
+                    <div class="form-group">
+                        <label for="currentVehicle">What vehicle do you currently drive?</label>
+                        <input type="text" id="currentVehicle" name="currentVehicle" placeholder="e.g., 2020 Honda Accord">
+                    </div>
+                    <div class="form-group">
+                        <label for="timeline">When are you looking to make a decision?</label>
+                        <select id="timeline" name="timeline">
+                            <option value="">Select timeline</option>
+                            <option value="immediately">Immediately (within 1 month)</option>
+                            <option value="short-term">Short-term (1-3 months)</option>
+                            <option value="medium-term">Medium-term (3-6 months)</option>
+                            <option value="long-term">Long-term (6+ months)</option>
+                            <option value="exploring">Just exploring options</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="specialRequests">Any specific questions or concerns?</label>
+                        <textarea id="specialRequests" name="specialRequests" placeholder="e.g., I'm particularly concerned about charging infrastructure in my area..."></textarea>
+                    </div>
+                </div>
+
+                <!-- Order Summary -->
+                <div class="order-summary">
+                    <h3 style="margin-bottom: 1rem; color: var(--elegant-blue);">Order Summary</h3>
+                    <div class="summary-row">
+                        <span id="selected-package">Personal Report</span>
+                        <span id="package-price">$79.00</span>
+                    </div>
+                    <div class="summary-row total">
+                        <span>Total</span>
+                        <span id="total-price">$79.00</span>
+                    </div>
+                </div>
+
+                <button type="submit" class="submit-button">Proceed to Payment</button>
+            </form>
+
+            <div class="security-notice">
+                <p><strong>Secure Checkout</strong></p>
+                <p>Your information is protected with industry-standard encryption</p>
+                <div class="trust-badges">
+                    <span class="trust-badge">🔒 SSL Secured</span>
+                    <span class="trust-badge">💳 Secure Payment</span>
+                    <span class="trust-badge">🛡️ Privacy Protected</span>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Package selection handling
+        document.querySelectorAll('input[name="package"]').forEach(radio => {
+            radio.addEventListener('change', function() {
+                // Update visual selection
+                document.querySelectorAll('.package-option').forEach(option => {
+                    option.classList.remove('selected');
+                });
+                this.closest('.package-option').classList.add('selected');
+                
+                // Update pricing
+                const packageName = this.value === 'personal-report' ? 'Personal Report' : 'Additional Scenario';
+                const price = this.value === 'personal-report' ? '$79.00' : '$10.00';
+                
+                document.getElementById('selected-package').textContent = packageName;
+                document.getElementById('package-price').textContent = price;
+                document.getElementById('total-price').textContent = price;
+            });
+        });
+
+        // Form submission handling
+        document.getElementById('orderForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Collect form data
+            const formData = new FormData(this);
+            const orderData = Object.fromEntries(formData);
+            
+            // Store order data in localStorage for now
+            localStorage.setItem('orderData', JSON.stringify(orderData));
+            
+            // Redirect to questionnaire
+            window.location.href = './questionnaire.html';
+        });
+    </script>
+</body>
+</html>

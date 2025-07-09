@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vehicle Analysis Questionnaire - Plug or Pump</title>
+    <meta name="description" content="Complete your detailed vehicle analysis questionnaire to receive your personalized report within 48 hours.">
+    <link href="https://fonts.googleapis.com/css2?family=Clash+Grotesk:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-black: #2c3e50;
+            --secondary-gray: #5c6b7d;
+            --light-gray: #f8fafb;
+            --border-light: #e8ecf0;
+            --white: #ffffff;
+            --text-primary: #2c3e50;
+            --text-secondary: #5c6b7d;
+            --text-light: #8a95a3;
+            --accent-blue: #4a90e2;
+            --success-green: #00a652;
+            --warning-orange: #ff6100;
+            --electric-blue: #5ba8f5;
+            --gas-orange: #ff6b35;
+            --elegant-blue: #6c8bcc;
+            --soft-blue: #a4c2f7;
+            --warm-gray: #6b7280;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Clash Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.5;
+            color: var(--text-primary);
+            background: var(--light-gray);
+            font-weight: 400;
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-light);
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 1.125rem;
+            font-weight: 500;
+            color: var(--text-primary);
+            text-decoration: none;
+            letter-spacing: -0.025em;
+        }
+
+        /* Progress Bar */
+        .progress-container {
+            background: var(--white);
+            padding: 1rem 2rem;
+            border-bottom: 1px solid var(--border-light);
+            margin-top: 60px;
+        }
+
+        .progress-bar {
+            max-width: 800px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .progress-step {
+            flex: 1;
+            height: 8px;
+            background: var(--border-light);
+            border-radius: 4px;
+            position: relative;
+        }
+
+        .progress-step.completed {
+            background: linear-gradient(135deg, var(--elegant-blue) 0%, var(--accent-blue) 100%);
+        }
+
+        .progress-text {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            white-space: nowrap;
+        }
+
+        /* Main Content */
+        .main-content {
+            padding: 2rem 0 4rem;
+            min-height: calc(100vh - 120px);
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .questionnaire-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .questionnaire-header h1 {
+            font-size: 2.5rem;
+            font-weight: 300;
+            margin-bottom: 1rem;
+            color: var(--elegant-blue);
+            letter-spacing: -0.025em;
+        }
+
+        .questionnaire-header p {
+            font-size: 1.125rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Question Sections */
+        .question-section {
+            background: var(--white);
+            border-radius: 12px;
+            padding: 2.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            display: none;
+        }
+
+        .question-section.active {
+            display: block;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 500;
+            color: var(--elegant-blue);
+            margin-bottom: 0.5rem;
+        }
+
+        .section-subtitle {
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            font-size: 1rem;
+        }
+
+        .question-group {
+            margin-bottom: 2rem;
+        }
+
+        .question-group:last-child {
+            margin-bottom: 0;
+        }
+
+        .question-label {
+            display: block;
+            margin-bottom: 1rem;
+            font-weight: 500;
+            color: var(--text-primary);
+            font-size: 1.1rem;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid var(--border-light);
+            border-radius: 8px;
+            font-size: 1rem;
+            font-family: inherit;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--elegant-blue);
+        }
+
+        .form-textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        /* Radio/Checkbox Options */
+        .option-group {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .option-item {
+            position: relative;
+        }
+
+        .option-item input[type="radio"],
+        .option-item input[type="checkbox"] {
+            position: absolute;
+            opacity: 0;
+        }
+
+        .option-item label {
+            display: block;
+            padding: 1rem;
+            border: 2px solid var(--border-light);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            font-weight: 400;
+        }
+
+        .option-item input:checked + label {
+            border-color: var(--elegant-blue);
+            background: rgba(108, 139, 204, 0.05);
+            color: var(--elegant-blue);
+            font-weight: 500;
+        }
+
+        .option-item label:hover {
+            border-color: var(--elegant-blue);
+        }
+
+        /* Navigation Buttons */
+        .navigation-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 3rem;
+            gap: 1rem;
+        }
+
+        .nav-button {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            min-width: 120px;
+        }
+
+        .nav-button.secondary {
+            background: var(--white);
+            color: var(--text-secondary);
+            border: 2px solid var(--border-light);
+        }
+
+        .nav-button.secondary:hover {
+            border-color: var(--elegant-blue);
+            color: var(--elegant-blue);
+        }
+
+        .nav-button.primary {
+            background: linear-gradient(135deg, var(--elegant-blue) 0%, var(--accent-blue) 100%);
+            color: var(--white);
+        }
+
+        .nav-button.primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(108, 139, 204, 0.4);
+        }
+
+        .nav-button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none !important;
+            box-shadow: none !important;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .question-section {
+                padding: 2rem;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .option-group {
+                grid-template-columns: 1fr;
+            }
+
+            .navigation-buttons {
+                flex-direction: column;
+            }
+
+            .questionnaire-header h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="./index.html" class="logo">
+                plugorpump.com
+            </a>
+        </div>
+    </nav>
+
+    <!-- Progress Bar -->
+    <div class="progress-container">
+        <div class="progress-bar">
+            <span class="progress-text">Question</span>
+            <div class="progress-step completed"></div>
+            <div class="progress-step"></div>
+            <div class="progress-step"></div>
+            <div class="progress-step"></div>
+            <div class="progress-step"></div>
+            <span class="progress-text"><span id="current-question">1</span> of 5</span>
+        </div>
+    </div>
+
+    <main class="main-content">
+        <div class="container">
+            <div class="questionnaire-header">
+                <h1>Vehicle Analysis Questionnaire</h1>
+                <p>Please answer these detailed questions so we can provide you with the most accurate and personalized vehicle decision analysis.</p>
+            </div>
+
+            <form id="questionnaireForm">
+                <!-- Section 1: Current Situation -->
+                <div class="question-section active" data-section="1">
+                    <h2 class="section-title">Your Current Situation</h2>
+                    <p class="section-subtitle">Tell us about your current vehicle and driving situation</p>
+
+                    <div class="question-group">
+                        <label class="question-label">What vehicle do you currently drive?</label>
+                        <div class="form-row">
+                            <input type="text" name="current_make" placeholder="Make (e.g., Honda)" class="form-input" required>
+                            <input type="text" name="current_model" placeholder="Model (e.g., Accord)" class="form-input" required>
+                        </div>
+                        <div class="form-row" style="margin-top: 1rem;">
+                            <input type="number" name="current_year" placeholder="Year" min="1990" max="2025" class="form-input" required>
+                            <select name="current_fuel_type" class="form-input" required>
+                                <option value="">Fuel Type</option>
+                                <option value="gasoline">Gasoline</option>
+                                <option value="hybrid">Hybrid</option>
+                                <option value="plug-in-hybrid">Plug-in Hybrid</option>
+                                <option value="electric">Electric</option>
+                                <option value="diesel">Diesel</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="question-group">
+                        <label class="question-label">How many miles do you drive per year?</label>
+                        <div class="option-group">
+                            <div class="option-item">
+                                <input type="radio" name="annual_miles" value="under-5000" id="miles-1">
+                                <label for="miles-1">Under 5,000</label>
+                            </div>
+                            <div class="option-item">
+                                <input type="radio" name="annual_miles" value="5000-10000" id="miles-2">
+                                <label for="miles-2">5,000 - 10,000</label>
+                            </div>
+                            <div class="option-item">
+                                <input type="radio" name="annual_miles" value="10000-15000" id="miles-3">
+                                <label for="miles-3">10,000 - 15,000</label>
+                            </div>
+                            <div class="option-item">
+                                <input type="radio" name="annual_miles" value="15000-20000" id="miles-4">
+                                <label for="miles-4">15,000 - 20,000</label>
+                            </div>
+                            <div class="option-item">
+                                <input type="radio" name="annual_miles" value="over-20000" id="miles-5">
+                                <label for="miles-5">Over 20,000</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="question-group">
+                        <label class="question-label">What is your typical daily commute (round trip)?</label>
+                        <input type="number" name="daily_commute" placeholder="Miles per day" class="form-input" min="0" max="500">
+                    </div>
+                </div>
+
+                <!-- Section 2: Location & Charging -->
+                <div class="question-section" data-section="2">
+                    <h2 class="section-title">Location & Charging</h2>
+                    <p class="section-subtitle">Help us understand your location and charging options</p>
+
+                    <div class="question-group">
+                        <label class="question-label">What's your location?</label>
+                        <div class="form-row">
+                            <input type="text" name="city" placeholder="City" class="form-input" required>
+                            <input type="text" name="state" placeholder="State" class="form-input" required>
+                        </div>
+                        <input type="text" name="zip_code" placeholder="ZIP Code" class="form-input" style="margin-top: 1rem;" maxlength="5">
+                    </div>
+
+                    <div class="question-group">
+                        <label class="question-label">What type of housing do you have?</label>
+                        <div class="option-group">
+                            <div class="option-item">
+                                <input type="radio" name="housing_type" value="single-family-home" id="housing-1">
+                                <label for="housing-1">Single Family Home</label>
+                            </div>
+                            <div class="option-item">
+                                <input type="radio" name="housing_type" value="townhouse" id="housing-2">
+                                <label for="housing-2">Townhouse/Condo</label>
+                            </div>
+                            <div class="option-item">
+                                <input type="radio" name="housing_type" value="apartment" id="housing-3">
+                                <label for="housing-3">Apartment</label>
+                            </div>
+                            <div class="option-item">
+                                <input type="radio" name="housing_type" value="other" id="housing-4">
+                                <label for="housing-4">Other</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="question-group">
+                        <label class="question-label">Do you have access to install a home charger?</label>
+                        <div class="option-group">
+                            <div class="option-item">
+                                <input type="radio" name="home_charging" value="yes-garage" id="charging-1">
+                                <label for="charging-1">Yes, in garage</label>
+                            </div>
+                            <div class="option-item">
+                                <input type="radio" name="home_charging" value="yes-driveway" id="charging-2">
+                                <label for="charging-2">Yes, in driveway</label>
+                            </div>
+                            <div class="option-item">
+                                <input type="radio" name="home_charging" value="maybe" id="charging-3">
+                                <label for="charging-3">Possibly</label>
+                            </div>
+                            <div class="option-item">
+                                <input type="radio" name="home_charging" value="no" id="charging-4">
+                                <label for="charging-4">No</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="question-group">
+                        <label class="question-label">Do you have charging available at work?</label>
+                        <div class="option-group">
+                            <div class="option-item">
+                                <input type="radio" name="work_charging" value="yes-free" id="work-1">
+                                <label for="work-1">Yes, free</label>
+                            </div>
+                            <div class="option-item">
+                                <input type="radio" name="work_charging" value="yes-paid" id="work-2">
+                                <label for="work-2">Yes, paid</label>
+                            </div>
+                            <div class="option-item">
+                                <input type="radio" name="work_charging" value="no" id="work-3">
+                                <label for="work-3">No</label>
+                            </div>
+                            <div class="option-item">
+                                <input type="radio" name="work_charging" value="work-from-home" id="work-4">
+                                <label for="work-4">Work from home</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section 3: Budget & Preferences -->
+                <div class="question-section" data-section="3">
+                    <h2 class="section-title">Budget & Preferences</h2>
+                    <p class="section-subtitle">Tell us about your budget and vehicle preferences</p>
+
+                    <div class="question-group">
+                        <label class="question-label">What's your target budget for a new vehicle?</label>
+                        <div class="option-group">
+                            <div class="option-item">
+                                <input type="radio" name="budget_range" value="under-25000" id="budget-1">
+                                <label for="budget-1">Under $25,000</label>
+                            </div>
+                            <div class="option-item">
+                                <input type="radio" name="budget_range" value="25000-35000" id="budget-2">
+                                <label for="budget-2">$25,000 - $35,000</label>
+                            </div>
+                            <div class="option-item">
+                                <input type="radio" name="budget_range" value="35000-50000" id="budget-3">
+                                <label for="budget-3">$35,000 - $50,000</label>
+                            </div>
+                            <div class="option-item">
+                                <input type="radio" name="budget_range" value="50000-75000" id="budget-4">
+                                <label for="budget-4">$50,000 - $75,000</label>
+                            </div>
+                            <div class="option-item">
+                                <input type="radio" name="budget_range" value="over-75000" id="budget-5">
+                                <label for="budget-5">Over $75,000</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="question-group">
+                        <label class="question-label">What vehicle size do you prefer?</label>
+                        <div class="option-group">
+                            <div class="option-item">
+                                <input type="checkbox" name="vehicle_size" value="compact" id="size-1">
+                                <label for="size-1">Compact</label>
+                            </div>
+                            <div class="option-item">
+                                <input type="checkbox" name="vehicle_size" value="sedan" id="size-2">
+                                <label for="size-2">Sedan</label>
+                            </div>
+                            <div class="option-item">
+                                <input type="checkbox" name="vehicle_size" value="suv-small" id="size-3">
+                                <label for="size-3">Small SUV</label>
+                            </div>
+                            <div class="option-item">
+                                <input type="checkbox" name="vehicle_size" value="suv-large" id="size-4">
+                                <label for="size-4">Large SUV</label>
+                            </div>
+                            <div class="option-item">
+                                <input type="checkbox" name="vehicle_size" value="truck" id="size-5">
+                                <label for="size-5">Truck</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="question-group">
+                        <label class="question-label">How important are these factors to you?</label>
+                        <div style="display: grid; gap: 1rem; margin-top: 1rem;">
+                            <div style="display: flex; align-items: center; gap: 1rem;">
+                                <span style="min-width: 150px;">Environmental impact:</span>
+                                <select name="importance_environment" class="form-input">
+                                    <option value="">Select</option>
+                                    <option value="very-important">Very Important</option>
+                                    <option value="somewhat-important">Somewhat Important</option>
+                                    <option value="not-important">Not Important</option>
+                                </select>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 1rem;">
+                                <span style="min-width: 150px;">Cost savings:</span>
+                                <select name="importance_cost" class="form-input">
+                                    <option value="">Select</option>
+                                    <option value="very-important">Very Important</option>
+                                    <option value="somewhat-important">Somewhat Important</option>
+                                    <option value="not-important">Not Important</option>
+                                </select>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 1rem;">
+                                <span style="min-width: 150px;">Latest technology:</span>
+                                <select name="importance_technology" class="form-input">
+                                    <option value="">Select</option>
+                                    <option value="very-important">Very Important</option>
+                                    <option value="somewhat-important">Somewhat Important</option>
+                                    <option value="not-important">Not Important</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section 4: Driving Patterns -->
+                <div class="question-section" data-section="4">
+                    <h2 class="section-title">Driving Patterns</h2>
+                    <p class="section-subtitle">Help us understand how you use your vehicle</p>
+
+                    <div class="question-group">
+                        <label class="question-label">How often do you take long trips (over 200 miles)?</label>
+                        <div class="option-group">
+                            <div class="option-item">
+                                <input type="radio" name="long_trips" value="never" id="trips-1">
+                                <label for="trips-1">Never</label>
+                            </div>
+                            <div class="option-item">
+                                <input type="radio" name="long_trips" value="rarely" id="trips-2">
+                                <label for="trips-2">Rarely (1-2/year)</label>
+                            </div>
+                            <div class="option-item">
+                                <input type="radio" name="long_trips" value="sometimes" id="trips-3">
+                                <label for="trips-3">Sometimes (3-6/year)</label>
+                            </div>
+                            <div class="option-item">
+                                <input type="radio" name="long_trips" value="often" id="trips-4">
+                                <label for="trips-4">Often (monthly)</label>
+                            </div>
+                            <div class="option-item">
+                                <input type="radio" name="long_trips" value="frequently" id="trips-5">
+                                <label for="trips-5">Frequently (weekly)</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="question-group">
+                        <label class="question-label">What's your current monthly fuel cost?</label>
+                        <input type="number" name="monthly_fuel_cost" placeholder="$ per month" class="form-input" min="0" max="1000">
+                    </div>
+
+                    <div class="question-group">
+                        <label class="question-label">How do you primarily use your vehicle?</label>
+                        <div class="option-group">
+                            <div class="option-item">
+                                <input type="checkbox" name="vehicle_use" value="daily-commute" id="use-1">
+                                <label for="use-1">Daily commute</label>
+                            </div>
+                            <div class="option-item">
+                                <input type="checkbox" name="vehicle_use" value="errands" id="use-2">
+                                <label for="use-2">Errands/shopping</label>
+                            </div>
+                            <div class="option-item">
+                                <input type="checkbox" name="vehicle_use" value="family-trips" id="use-3">
+                                <label for="use-3">Family trips</label>
+                            </div>
+                            <div class="option-item">
+                                <input type="checkbox" name="vehicle_use" value="work-travel" id="use-4">
+                                <label for="use-4">Work travel</label>
+                            </div>
+                            <div class="option-item">
+                                <input type="checkbox" name="vehicle_use" value="recreation" id="use-5">
+                                <label for="use-5">Recreation</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section 5: Additional Information -->
+                <div class="question-section" data-section="5">
+                    <h2 class="section-title">Additional Information</h2>
+                    <p class="section-subtitle">Any final details to help us provide the best recommendations</p>
+
+                    <div class="question-group">
+                        <label class="question-label">When are you planning to make your vehicle decision?</label>
+                        <div class="option-group">
+                            <div class="option-item">
+                                <input type="radio" name="decision_timeline" value="immediately" id="timeline-1">
+                                <label for="timeline-1">Immediately</label>
+                            </div>
+                            <div class="option-item">
+                                <input type="radio" name="decision_timeline" value="1-3-months" id="timeline-2">
+                                <label for="timeline-2">1-3 months</label>
+                            </div>
+                            <div class="option-item">
+                                <input type="radio" name="decision_timeline" value="3-6-months" id="timeline-3">
+                                <label for="timeline-3">3-6 months</label>
+                            </div>
+                            <div class="option-item">
+                                <input type="radio" name="decision_timeline" value="6-12-months" id="timeline-4">
+                                <label for="timeline-4">6-12 months</label>
+                            </div>
+                            <div class="option-item">
+                                <input type="radio" name="decision_timeline" value="just-exploring" id="timeline-5">
+                                <label for="timeline-5">Just exploring</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="question-group">
+                        <label class="question-label">Are there any specific vehicles you're considering?</label>
+                        <textarea name="specific_vehicles" placeholder="e.g., Tesla Model 3, Honda Accord Hybrid, Toyota Camry..." class="form-input form-textarea"></textarea>
+                    </div>
+
+                    <div class="question-group">
+                        <label class="question-label">Any specific concerns or questions you'd like us to address?</label>
+                        <textarea name="specific_concerns" placeholder="e.g., charging infrastructure, resale value, maintenance costs, range anxiety..." class="form-input form-textarea"></textarea>
+                    </div>
+
+                    <div class="question-group">
+                        <label class="question-label">How did you hear about us?</label>
+                        <select name="referral_source" class="form-input">
+                            <option value="">Select source</option>
+                            <option value="google-search">Google search</option>
+                            <option value="social-media">Social media</option>
+                            <option value="friend-referral">Friend/family referral</option>
+                            <option value="online-ad">Online advertisement</option>
+                            <option value="news-article">News article</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Navigation Buttons -->
+                <div class="navigation-buttons">
+                    <button type="button" id="prevBtn" class="nav-button secondary" style="visibility: hidden;">Previous</button>
+                    <button type="button" id="nextBtn" class="nav-button primary">Next</button>
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <script>
+        let currentSection = 1;
+        const totalSections = 5;
+
+        // Update progress bar
+        function updateProgress() {
+            const progressSteps = document.querySelectorAll('.progress-step');
+            progressSteps.forEach((step, index) => {
+                if (index < currentSection) {
+                    step.classList.add('completed');
+                } else {
+                    step.classList.remove('completed');
+                }
+            });
+            document.getElementById('current-question').textContent = currentSection;
+        }
+
+        // Show section
+        function showSection(section) {
+            document.querySelectorAll('.question-section').forEach(s => s.classList.remove('active'));
+            document.querySelector(`[data-section="${section}"]`).classList.add('active');
+            
+            // Update navigation buttons
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            
+            prevBtn.style.visibility = section === 1 ? 'hidden' : 'visible';
+            nextBtn.textContent = section === totalSections ? 'Submit' : 'Next';
+            
+            updateProgress();
+        }
+
+        // Validate current section
+        function validateCurrentSection() {
+            const currentSectionElement = document.querySelector(`[data-section="${currentSection}"]`);
+            const requiredInputs = currentSectionElement.querySelectorAll('input[required], select[required]');
+            
+            for (let input of requiredInputs) {
+                if (!input.value.trim()) {
+                    return false;
+                }
+            }
+            
+            // Check for radio button groups
+            const radioGroups = {};
+            currentSectionElement.querySelectorAll('input[type="radio"]').forEach(radio => {
+                if (!radioGroups[radio.name]) {
+                    radioGroups[radio.name] = false;
+                }
+                if (radio.checked) {
+                    radioGroups[radio.name] = true;
+                }
+            });
+            
+            for (let groupName in radioGroups) {
+                if (!radioGroups[groupName]) {
+                    return false;
+                }
+            }
+            
+            return true;
+        }
+
+        // Navigation event listeners
+        document.getElementById('nextBtn').addEventListener('click', function() {
+            if (currentSection < totalSections) {
+                if (validateCurrentSection()) {
+                    currentSection++;
+                    showSection(currentSection);
+                } else {
+                    alert('Please fill in all required fields before continuing.');
+                }
+            } else {
+                // Submit form
+                submitQuestionnaire();
+            }
+        });
+
+        document.getElementById('prevBtn').addEventListener('click', function() {
+            if (currentSection > 1) {
+                currentSection--;
+                showSection(currentSection);
+            }
+        });
+
+        // Submit questionnaire
+        function submitQuestionnaire() {
+            const formData = new FormData(document.getElementById('questionnaireForm'));
+            const questionnaireData = {};
+            
+            // Handle regular form fields
+            for (let [key, value] of formData.entries()) {
+                if (questionnaireData[key]) {
+                    // Handle multiple values (checkboxes)
+                    if (Array.isArray(questionnaireData[key])) {
+                        questionnaireData[key].push(value);
+                    } else {
+                        questionnaireData[key] = [questionnaireData[key], value];
+                    }
+                } else {
+                    questionnaireData[key] = value;
+                }
+            }
+            
+            // Get order data from localStorage
+            const orderData = JSON.parse(localStorage.getItem('orderData') || '{}');
+            
+            // Combine data
+            const completeData = {
+                order: orderData,
+                questionnaire: questionnaireData,
+                submittedAt: new Date().toISOString()
+            };
+            
+            // Store complete data
+            localStorage.setItem('completeSubmission', JSON.stringify(completeData));
+            
+            // Redirect to confirmation page
+            window.location.href = './confirmation.html';
+        }
+
+        // Initialize
+        showSection(1);
+    </script>
+</body>
+</html>

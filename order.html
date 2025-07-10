@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Order Your Personal Report - Plug or Pump</title>
-    <meta name="description" content="Order your professional vehicle decision analysis report for $79. Get personalized recommendations within 48 hours.">
+    <title>Order Your Vehicle Decision Report - PlugOrPump</title>
+    <meta name="description" content="Get your personalized 25-page vehicle decision report. Answer 15 detailed questions to receive professional EV vs gas analysis with financial projections.">
     <link href="https://fonts.googleapis.com/css2?family=Clash+Grotesk:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -70,269 +70,371 @@
             letter-spacing: -0.025em;
         }
 
-        .nav-menu {
-            display: flex;
-            list-style: none;
-            gap: 2rem;
-        }
-
-        .nav-menu a {
+        .back-link {
             color: var(--text-secondary);
             text-decoration: none;
-            font-weight: 400;
             font-size: 0.875rem;
             transition: color 0.3s ease;
-            letter-spacing: 0.025em;
         }
 
-        .nav-menu a:hover {
+        .back-link:hover {
             color: var(--text-primary);
         }
 
-        /* Main Content */
-        .main-content {
-            padding: 120px 0 80px;
-            min-height: 100vh;
-        }
-
-        .container {
+        /* Main Container */
+        .main-container {
             max-width: 800px;
             margin: 0 auto;
-            padding: 0 2rem;
+            padding: 120px 2rem 80px;
         }
 
-        .order-header {
+        .questionnaire-header {
             text-align: center;
             margin-bottom: 3rem;
         }
 
-        .order-header h1 {
+        .questionnaire-header h1 {
             font-size: 2.5rem;
             font-weight: 300;
-            margin-bottom: 1rem;
             color: var(--elegant-blue);
+            margin-bottom: 1rem;
             letter-spacing: -0.025em;
         }
 
-        .order-header p {
+        .questionnaire-header p {
             font-size: 1.125rem;
             color: var(--text-secondary);
             max-width: 600px;
             margin: 0 auto;
         }
 
-        /* Order Form */
-        .order-form {
+        /* Progress Bar */
+        .progress-container {
+            background: var(--white);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        .progress-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .progress-text {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: var(--border-light);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(135deg, var(--elegant-blue) 0%, var(--accent-blue) 100%);
+            transition: width 0.3s ease;
+            width: 0%;
+        }
+
+        /* Question Container */
+        .question-container {
             background: var(--white);
             border-radius: 12px;
             padding: 3rem;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            display: none;
+        }
+
+        .question-container.active {
+            display: block;
+        }
+
+        .question-header {
             margin-bottom: 2rem;
         }
 
-        .form-section {
-            margin-bottom: 2.5rem;
+        .question-number {
+            font-size: 0.875rem;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 0.5rem;
         }
 
-        .form-section:last-child {
-            margin-bottom: 0;
+        .question-title {
+            font-size: 1.75rem;
+            font-weight: 400;
+            color: var(--text-primary);
+            line-height: 1.4;
+            margin-bottom: 0.5rem;
         }
 
-        .section-title {
-            font-size: 1.25rem;
-            font-weight: 500;
-            color: var(--elegant-blue);
-            margin-bottom: 1.5rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 2px solid var(--border-light);
+        .question-subtitle {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
         }
 
+        /* Form Elements */
         .form-group {
             margin-bottom: 1.5rem;
         }
 
-        .form-group label {
+        .form-label {
             display: block;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.75rem;
             font-weight: 500;
             color: var(--text-primary);
+            font-size: 1rem;
         }
 
-        .form-group input,
-        .form-group select,
-        .form-group textarea {
+        .form-input {
             width: 100%;
-            padding: 12px 16px;
+            padding: 1rem;
             border: 2px solid var(--border-light);
             border-radius: 8px;
             font-size: 1rem;
             font-family: inherit;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+            background: var(--white);
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--accent-blue);
+            box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.1);
+        }
+
+        .form-select {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid var(--border-light);
+            border-radius: 8px;
+            font-size: 1rem;
+            font-family: inherit;
+            background: var(--white);
+            cursor: pointer;
             transition: border-color 0.3s ease;
         }
 
-        .form-group input:focus,
-        .form-group select:focus,
-        .form-group textarea:focus {
+        .form-select:focus {
             outline: none;
-            border-color: var(--elegant-blue);
+            border-color: var(--accent-blue);
         }
 
-        .form-group textarea {
-            resize: vertical;
-            min-height: 100px;
-        }
-
-        .form-row {
+        /* Radio and Checkbox Groups */
+        .radio-group, .checkbox-group {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1rem;
+            gap: 0.75rem;
         }
 
-        /* Package Selection */
-        .package-selection {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .package-option {
+        .radio-item, .checkbox-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            padding: 1rem;
             border: 2px solid var(--border-light);
             border-radius: 8px;
-            padding: 1.5rem;
             cursor: pointer;
             transition: all 0.3s ease;
-            text-align: center;
+            background: var(--white);
         }
 
-        .package-option:hover {
-            border-color: var(--elegant-blue);
+        .radio-item:hover, .checkbox-item:hover {
+            border-color: var(--accent-blue);
+            background: rgba(74, 144, 226, 0.02);
         }
 
-        .package-option.selected {
-            border-color: var(--elegant-blue);
-            background: rgba(108, 139, 204, 0.05);
+        .radio-item.selected, .checkbox-item.selected {
+            border-color: var(--accent-blue);
+            background: rgba(74, 144, 226, 0.05);
         }
 
-        .package-option input[type="radio"] {
-            display: none;
+        .radio-input, .checkbox-input {
+            margin-top: 0.25rem;
         }
 
-        .package-title {
-            font-size: 1.125rem;
-            font-weight: 600;
-            color: var(--elegant-blue);
-            margin-bottom: 0.5rem;
+        .radio-content, .checkbox-content {
+            flex: 1;
         }
 
-        .package-price {
-            font-size: 2rem;
-            font-weight: 300;
+        .radio-label, .checkbox-label {
+            font-weight: 500;
             color: var(--text-primary);
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.25rem;
+            display: block;
         }
 
-        .package-description {
+        .radio-description, .checkbox-description {
             font-size: 0.875rem;
             color: var(--text-secondary);
+            line-height: 1.4;
         }
 
-        /* Order Summary */
-        .order-summary {
-            background: var(--light-gray);
-            border-radius: 8px;
-            padding: 1.5rem;
-            margin-bottom: 2rem;
+        /* Vehicle Input Grid */
+        .vehicle-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
         }
 
-        .summary-row {
+        /* Navigation Buttons */
+        .navigation-container {
+            background: var(--white);
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
             display: flex;
             justify-content: space-between;
-            margin-bottom: 0.5rem;
+            align-items: center;
         }
 
-        .summary-row.total {
-            font-weight: 600;
-            font-size: 1.125rem;
-            padding-top: 0.5rem;
-            border-top: 2px solid var(--border-light);
-            margin-top: 1rem;
-            margin-bottom: 0;
-        }
-
-        /* Submit Button */
-        .submit-button {
-            width: 100%;
+        .nav-button {
             background: linear-gradient(135deg, var(--elegant-blue) 0%, var(--accent-blue) 100%);
             color: var(--white);
-            padding: 1rem 2rem;
             border: none;
+            padding: 1rem 2rem;
             border-radius: 8px;
-            font-weight: 600;
             font-size: 1rem;
+            font-weight: 500;
             cursor: pointer;
             transition: all 0.3s ease;
             text-transform: uppercase;
             letter-spacing: 0.5px;
+            font-family: inherit;
         }
 
-        .submit-button:hover {
+        .nav-button:hover {
             transform: translateY(-2px);
             box-shadow: 0 8px 25px rgba(108, 139, 204, 0.4);
         }
 
-        /* Security Notice */
-        .security-notice {
-            background: var(--white);
-            border-radius: 8px;
-            padding: 1.5rem;
-            text-align: center;
-            border: 1px solid var(--border-light);
+        .nav-button:disabled {
+            background: var(--border-light);
+            color: var(--text-light);
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
         }
 
-        .security-notice p {
-            font-size: 0.875rem;
+        .nav-button.secondary {
+            background: transparent;
             color: var(--text-secondary);
-            margin-bottom: 0.5rem;
+            border: 2px solid var(--border-light);
         }
 
-        .security-notice .trust-badges {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            margin-top: 1rem;
+        .nav-button.secondary:hover {
+            background: var(--border-light);
+            color: var(--text-primary);
         }
 
-        .trust-badge {
-            padding: 0.25rem 0.75rem;
+        /* Loading State */
+        .loading-container {
+            text-align: center;
+            padding: 4rem 2rem;
+            display: none;
+        }
+
+        .loading-container.active {
+            display: block;
+        }
+
+        .loading-spinner {
+            width: 60px;
+            height: 60px;
+            border: 4px solid var(--border-light);
+            border-top: 4px solid var(--accent-blue);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 2rem;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .loading-text {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+
+        .loading-subtitle {
+            font-size: 1rem;
+            color: var(--text-light);
+        }
+
+        /* Success State */
+        .success-container {
+            text-align: center;
+            padding: 4rem 2rem;
+            display: none;
+        }
+
+        .success-container.active {
+            display: block;
+        }
+
+        .success-icon {
+            width: 80px;
+            height: 80px;
             background: var(--success-green);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 2rem;
+            font-size: 2rem;
             color: white;
-            border-radius: 20px;
-            font-size: 0.75rem;
-            font-weight: 600;
         }
 
         /* Responsive */
         @media (max-width: 768px) {
-            .nav-menu {
-                display: none;
+            .main-container {
+                padding: 100px 1rem 60px;
             }
 
-            .order-form {
+            .question-container {
                 padding: 2rem;
             }
 
-            .form-row {
-                grid-template-columns: 1fr;
-            }
-
-            .package-selection {
-                grid-template-columns: 1fr;
-            }
-
-            .order-header h1 {
+            .questionnaire-header h1 {
                 font-size: 2rem;
             }
+
+            .vehicle-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .navigation-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .nav-button {
+                width: 100%;
+            }
+        }
+
+        /* Error States */
+        .form-error {
+            color: var(--warning-orange);
+            font-size: 0.875rem;
+            margin-top: 0.5rem;
+        }
+
+        .form-input.error {
+            border-color: var(--warning-orange);
         }
     </style>
 </head>
@@ -340,154 +442,953 @@
     <!-- Navigation -->
     <nav class="navbar">
         <div class="nav-container">
-            <a href="./index.html" class="logo">
+            <a href="index.html" class="logo">
                 plugorpump.com
             </a>
-            <ul class="nav-menu">
-                <li><a href="./index.html">Home</a></li>
-                <li><a href="./index.html#how-it-works">How It Works</a></li>
-                <li><a href="./index.html#pricing">Pricing</a></li>
-                <li><a href="./vehicle-calculator.html">Free Calculator</a></li>
-            </ul>
+            <a href="index.html" class="back-link">← Back to Home</a>
         </div>
     </nav>
 
-    <main class="main-content">
-        <div class="container">
-            <div class="order-header">
-                <h1>Order Your Personal Report</h1>
-                <p>Get professional vehicle decision analysis tailored to your specific situation. Complete your order and we'll send you a detailed questionnaire.</p>
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Header -->
+        <div class="questionnaire-header">
+            <h1>Get Your Personal Vehicle Report</h1>
+            <p>Answer 15 detailed questions to receive your comprehensive 25-page analysis comparing electric and gas vehicles for your specific situation.</p>
+        </div>
+
+        <!-- Progress Bar -->
+        <div class="progress-container">
+            <div class="progress-header">
+                <span class="progress-text">Question <span id="current-question">1</span> of 15</span>
+                <span class="progress-text"><span id="progress-percentage">7</span>% Complete</span>
             </div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progress-fill"></div>
+            </div>
+        </div>
 
-            <form class="order-form" id="orderForm">
-                <!-- Package Selection -->
-                <div class="form-section">
-                    <h2 class="section-title">Choose Your Package</h2>
-                    <div class="package-selection">
-                        <label class="package-option selected" for="personal-report">
-                            <input type="radio" name="package" value="personal-report" id="personal-report" checked>
-                            <div class="package-title">Personal Report</div>
-                            <div class="package-price">$79</div>
-                            <div class="package-description">25-page comprehensive analysis</div>
-                        </label>
-                        <label class="package-option" for="additional-scenario">
-                            <input type="radio" name="package" value="additional-scenario" id="additional-scenario">
-                            <div class="package-title">Additional Scenario</div>
-                            <div class="package-price">$10</div>
-                            <div class="package-description">Extra scenario analysis</div>
-                        </label>
+        <!-- Questions -->
+        
+        <!-- Question 1: ZIP Code -->
+        <div class="question-container active" data-question="1">
+            <div class="question-header">
+                <div class="question-number">Question 1 of 15</div>
+                <h2 class="question-title">What's your ZIP code?</h2>
+                <p class="question-subtitle">We'll use this to calculate local electricity rates, gas prices, and available incentives in your area.</p>
+            </div>
+            <div class="form-group">
+                <label class="form-label" for="q1">ZIP Code</label>
+                <input type="text" id="q1" name="q1" class="form-input" placeholder="Enter your 5-digit ZIP code" maxlength="5" pattern="[0-9]{5}" required>
+                <div class="form-error" id="q1-error"></div>
+            </div>
+        </div>
+
+        <!-- Question 2: Annual Mileage -->
+        <div class="question-container" data-question="2">
+            <div class="question-header">
+                <div class="question-number">Question 2 of 15</div>
+                <h2 class="question-title">How many miles do you drive per year?</h2>
+                <p class="question-subtitle">This helps us calculate your annual fuel costs and determine if an EV's range meets your needs.</p>
+            </div>
+            <div class="radio-group" id="q2-group">
+                <div class="radio-item" data-value="8000">
+                    <input type="radio" name="q2" value="8000" class="radio-input" id="q2-8000">
+                    <div class="radio-content">
+                        <label class="radio-label" for="q2-8000">Less than 10,000 miles</label>
+                        <div class="radio-description">Light driving - mainly local errands and short commutes</div>
                     </div>
                 </div>
-
-                <!-- Customer Information -->
-                <div class="form-section">
-                    <h2 class="section-title">Your Information</h2>
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="firstName">First Name *</label>
-                            <input type="text" id="firstName" name="firstName" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="lastName">Last Name *</label>
-                            <input type="text" id="lastName" name="lastName" required>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="email">Email Address *</label>
-                        <input type="email" id="email" name="email" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="phone">Phone Number</label>
-                        <input type="tel" id="phone" name="phone">
+                <div class="radio-item" data-value="12000">
+                    <input type="radio" name="q2" value="12000" class="radio-input" id="q2-12000">
+                    <div class="radio-content">
+                        <label class="radio-label" for="q2-12000">10,000 - 15,000 miles</label>
+                        <div class="radio-description">Average driving - daily commutes and weekend trips</div>
                     </div>
                 </div>
-
-                <!-- Quick Context -->
-                <div class="form-section">
-                    <h2 class="section-title">Quick Context (Optional)</h2>
-                    <div class="form-group">
-                        <label for="currentVehicle">What vehicle do you currently drive?</label>
-                        <input type="text" id="currentVehicle" name="currentVehicle" placeholder="e.g., 2020 Honda Accord">
-                    </div>
-                    <div class="form-group">
-                        <label for="timeline">When are you looking to make a decision?</label>
-                        <select id="timeline" name="timeline">
-                            <option value="">Select timeline</option>
-                            <option value="immediately">Immediately (within 1 month)</option>
-                            <option value="short-term">Short-term (1-3 months)</option>
-                            <option value="medium-term">Medium-term (3-6 months)</option>
-                            <option value="long-term">Long-term (6+ months)</option>
-                            <option value="exploring">Just exploring options</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="specialRequests">Any specific questions or concerns?</label>
-                        <textarea id="specialRequests" name="specialRequests" placeholder="e.g., I'm particularly concerned about charging infrastructure in my area..."></textarea>
+                <div class="radio-item" data-value="18000">
+                    <input type="radio" name="q2" value="18000" class="radio-input" id="q2-18000">
+                    <div class="radio-content">
+                        <label class="radio-label" for="q2-18000">15,000 - 20,000 miles</label>
+                        <div class="radio-description">Heavy driving - long commutes or frequent travel</div>
                     </div>
                 </div>
-
-                <!-- Order Summary -->
-                <div class="order-summary">
-                    <h3 style="margin-bottom: 1rem; color: var(--elegant-blue);">Order Summary</h3>
-                    <div class="summary-row">
-                        <span id="selected-package">Personal Report</span>
-                        <span id="package-price">$79.00</span>
+                <div class="radio-item" data-value="25000">
+                    <input type="radio" name="q2" value="25000" class="radio-input" id="q2-25000">
+                    <div class="radio-content">
+                        <label class="radio-label" for="q2-25000">More than 20,000 miles</label>
+                        <div class="radio-description">Very heavy driving - road warriors and delivery drivers</div>
                     </div>
-                    <div class="summary-row total">
-                        <span>Total</span>
-                        <span id="total-price">$79.00</span>
-                    </div>
-                </div>
-
-                <button type="submit" class="submit-button">Proceed to Payment</button>
-            </form>
-
-            <div class="security-notice">
-                <p><strong>Secure Checkout</strong></p>
-                <p>Your information is protected with industry-standard encryption</p>
-                <div class="trust-badges">
-                    <span class="trust-badge">🔒 SSL Secured</span>
-                    <span class="trust-badge">💳 Secure Payment</span>
-                    <span class="trust-badge">🛡️ Privacy Protected</span>
                 </div>
             </div>
         </div>
-    </main>
 
+        <!-- Question 3: Daily Commute -->
+        <div class="question-container" data-question="3">
+            <div class="question-header">
+                <div class="question-number">Question 3 of 15</div>
+                <h2 class="question-title">What's your typical daily commute?</h2>
+                <p class="question-subtitle">Understanding your daily driving patterns helps us assess if an EV's range suits your routine.</p>
+            </div>
+            <div class="radio-group" id="q3-group">
+                <div class="radio-item" data-value="5">
+                    <input type="radio" name="q3" value="5" class="radio-input" id="q3-5">
+                    <div class="radio-content">
+                        <label class="radio-label" for="q3-5">Less than 10 miles round trip</label>
+                        <div class="radio-description">Short local commute or work from home</div>
+                    </div>
+                </div>
+                <div class="radio-item" data-value="25">
+                    <input type="radio" name="q3" value="25" class="radio-input" id="q3-25">
+                    <div class="radio-content">
+                        <label class="radio-label" for="q3-25">10-40 miles round trip</label>
+                        <div class="radio-description">Typical suburban commute</div>
+                    </div>
+                </div>
+                <div class="radio-item" data-value="60">
+                    <input type="radio" name="q3" value="60" class="radio-input" id="q3-60">
+                    <div class="radio-content">
+                        <label class="radio-label" for="q3-60">40-80 miles round trip</label>
+                        <div class="radio-description">Longer commute or cross-town travel</div>
+                    </div>
+                </div>
+                <div class="radio-item" data-value="100">
+                    <input type="radio" name="q3" value="100" class="radio-input" id="q3-100">
+                    <div class="radio-content">
+                        <label class="radio-label" for="q3-100">More than 80 miles round trip</label>
+                        <div class="radio-description">Long-distance commute</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Question 4: Budget Range -->
+        <div class="question-container" data-question="4">
+            <div class="question-header">
+                <div class="question-number">Question 4 of 15</div>
+                <h2 class="question-title">What's your budget for a new vehicle?</h2>
+                <p class="question-subtitle">Include any trade-in value or down payment you're planning to make.</p>
+            </div>
+            <div class="radio-group" id="q4-group">
+                <div class="radio-item" data-value="25000">
+                    <input type="radio" name="q4" value="25000" class="radio-input" id="q4-25000">
+                    <div class="radio-content">
+                        <label class="radio-label" for="q4-25000">Under $30,000</label>
+                        <div class="radio-description">Budget-conscious, economy vehicles</div>
+                    </div>
+                </div>
+                <div class="radio-item" data-value="40000">
+                    <input type="radio" name="q4" value="40000" class="radio-input" id="q4-40000">
+                    <div class="radio-content">
+                        <label class="radio-label" for="q4-40000">$30,000 - $50,000</label>
+                        <div class="radio-description">Mid-range, mainstream vehicles</div>
+                    </div>
+                </div>
+                <div class="radio-item" data-value="65000">
+                    <input type="radio" name="q4" value="65000" class="radio-input" id="q4-65000">
+                    <div class="radio-content">
+                        <label class="radio-label" for="q4-65000">$50,000 - $80,000</label>
+                        <div class="radio-description">Premium vehicles with advanced features</div>
+                    </div>
+                </div>
+                <div class="radio-item" data-value="100000">
+                    <input type="radio" name="q4" value="100000" class="radio-input" id="q4-100000">
+                    <div class="radio-content">
+                        <label class="radio-label" for="q4-100000">$80,000+</label>
+                        <div class="radio-description">Luxury and high-performance vehicles</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Question 5: Vehicle Type -->
+        <div class="question-container" data-question="5">
+            <div class="question-header">
+                <div class="question-number">Question 5 of 15</div>
+                <h2 class="question-title">What type of vehicle do you need?</h2>
+                <p class="question-subtitle">Your vehicle type affects available options and features in both EV and gas categories.</p>
+            </div>
+            <div class="radio-group" id="q5-group">
+                <div class="radio-item" data-value="sedan">
+                    <input type="radio" name="q5" value="sedan" class="radio-input" id="q5-sedan">
+                    <div class="radio-content">
+                        <label class="radio-label" for="q5-sedan">Sedan</label>
+                        <div class="radio-description">Traditional 4-door passenger car</div>
+                    </div>
+                </div>
+                <div class="radio-item" data-value="suv">
+                    <input type="radio" name="q5" value="suv" class="radio-input" id="q5-suv">
+                    <div class="radio-content">
+                        <label class="radio-label" for="q5-suv">SUV/Crossover</label>
+                        <div class="radio-description">Higher seating, cargo space, all-weather capability</div>
+                    </div>
+                </div>
+                <div class="radio-item" data-value="truck">
+                    <input type="radio" name="q5" value="truck" class="radio-input" id="q5-truck">
+                    <div class="radio-content">
+                        <label class="radio-label" for="q5-truck">Pickup Truck</label>
+                        <div class="radio-description">Hauling capability, towing, work vehicle</div>
+                    </div>
+                </div>
+                <div class="radio-item" data-value="hatchback">
+                    <input type="radio" name="q5" value="hatchback" class="radio-input" id="q5-hatchback">
+                    <div class="radio-content">
+                        <label class="radio-label" for="q5-hatchback">Hatchback/Compact</label>
+                        <div class="radio-description">Smaller, efficient, city-friendly</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Question 6: Home Charging -->
+        <div class="question-container" data-question="6">
+            <div class="question-header">
+                <div class="question-number">Question 6 of 15</div>
+                <h2 class="question-title">Can you install home charging?</h2>
+                <p class="question-subtitle">Home charging significantly impacts EV convenience and cost savings.</p>
+            </div>
+            <div class="radio-group" id="q6-group">
+                <div class="radio-item" data-value="garage_240v">
+                    <input type="radio" name="q6" value="garage_240v" class="radio-input" id="q6-garage_240v">
+                    <div class="radio-content">
+                        <label class="radio-label" for="q6-garage_240v">Yes, garage with 240V capability</label>
+                        <div class="radio-description">Can install Level 2 charging (fastest home charging)</div>
+                    </div>
+                </div>
+                <div class="radio-item" data-value="garage_120v">
+                    <input type="radio" name="q6" value="garage_120v" class="radio-input" id="q6-garage_120v">
+                    <div class="radio-content">
+                        <label class="radio-label" for="q6-garage_120v">Yes, but only standard 120V outlet</label>
+                        <div class="radio-description">Level 1 charging only (slower overnight charging)</div>
+                    </div>
+                </div>
+                <div class="radio-item" data-value="driveway">
+                    <input type="radio" name="q6" value="driveway" class="radio-input" id="q6-driveway">
+                    <div class="radio-content">
+                        <label class="radio-label" for="q6-driveway">Driveway parking, could install outdoor charger</label>
+                        <div class="radio-description">Possible but may require electrical work</div>
+                    </div>
+                </div>
+                <div class="radio-item" data-value="none">
+                    <input type="radio" name="q6" value="none" class="radio-input" id="q6-none">
+                    <div class="radio-content">
+                        <label class="radio-label" for="q6-none">No, I park on street/apartment</label>
+                        <div class="radio-description">Would rely on public charging exclusively</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Question 7: Driving Habits -->
+        <div class="question-container" data-question="7">
+            <div class="question-header">
+                <div class="question-number">Question 7 of 15</div>
+                <h2 class="question-title">How often do you take long road trips?</h2>
+                <p class="question-subtitle">Long trips affect charging needs and may influence your vehicle choice.</p>
+            </div>
+            <div class="radio-group" id="q7-group">
+                <div class="radio-item" data-value="never">
+                    <input type="radio" name="q7" value="never" class="radio-input" id="q7-never">
+                    <div class="radio-content">
+                        <label class="radio-label" for="q7-never">Rarely or never</label>
+                        <div class="radio-description">Mostly local and regional driving</div>
+                    </div>
+                </div>
+                <div class="radio-item" data-value="few_times">
+                    <input type="radio" name="q7" value="few_times" class="radio-input" id="q7-few_times">
+                    <div class="radio-content">
+                        <label class="radio-label" for="q7-few_times">A few times per year</label>
+                        <div class="radio-description">Occasional vacation or family trips</div>
+                    </div>
+                </div>
+                <div class="radio-item" data-value="monthly">
+                    <input type="radio" name="q7" value="monthly" class="radio-input" id="q7-monthly">
+                    <div class="radio-content">
+                        <label class="radio-label" for="q7-monthly">Monthly or more often</label>
+                        <div class="radio-description">Regular long-distance travel</div>
+                    </div>
+                </div>
+                <div class="radio-item" data-value="weekly">
+                    <input type="radio" name="q7" value="weekly" class="radio-input" id="q7-weekly">
+                    <div class="radio-content">
+                        <label class="radio-label" for="q7-weekly">Weekly long trips</label>
+                        <div class="radio-description">Frequent travel, covering territory</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Question 8: Environmental Priority -->
+        <div class="question-container" data-question="8">
+            <div class="question-header">
+                <div class="question-number">Question 8 of 15</div>
+                <h2 class="question-title">How important is environmental impact to you?</h2>
+                <p class="question-subtitle">This helps us weight environmental benefits in your personalized analysis.</p>
+            </div>
+            <div class="radio-group" id="q8-group">
+                <div class="radio-item" data-value="not_important">
+                    <input type="radio" name="q8" value="not_important" class="radio-input" id="q8-not_important">
+                    <div class="radio-content">
+                        <label class="radio-label" for="q8-not_important">Not a priority</label>
+                        <div class="radio-description">Focus on cost and practicality</div>
+                    </div>
+                </div>
+                <div class="radio-item" data-value="somewhat">
+                    <input type="radio" name="q8" value="somewhat" class="radio-input" id="q8-somewhat">
+                    <div class="radio-content">
+                        <label class="radio-label" for="q8-somewhat">Somewhat important</label>
+                        <div class="radio-description">Nice to have, but not deciding factor</div>
+                    </div>
+                </div>
+                <div class="radio-item" data-value="important">
+                    <input type="radio" name="q8" value="important" class="radio-input" id="q8-important">
+                    <div class="radio-content">
+                        <label class="radio-label" for="q8-important">Very important</label>
+                        <div class="radio-description">Significant factor in my decision</div>
+                    </div>
+                </div>
+                <div class="radio-item" data-value="critical">
+                    <input type="radio" name="q8" value="critical" class="radio-input" id="q8-critical">
+                    <div class="radio-content">
+                        <label class="radio-label" for="q8-critical">Top priority</label>
+                        <div class="radio-description">Primary reason for considering EV</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Question 9: Technology Comfort -->
+        <div class="question-container" data-question="9">
+            <div class="question-header">
+                <div class="question-number">Question 9 of 15</div>
+                <h2 class="question-title">How comfortable are you with new technology?</h2>
+                <p class="question-subtitle">EVs often have different interfaces and charging requirements than traditional vehicles.</p>
+            </div>
+            <div class="radio-group" id="q9-group">
+                <div class="radio-item" data-value="early_adopter">
+                    <input type="radio" name="q9" value="early_adopter" class="radio-input" id="q9-early_adopter">
+                    <div class="radio-content">
+                        <label class="radio-label" for="q9-early_adopter">Love new technology</label>
+                        <div class="radio-description">Enjoy learning new systems and features</div>
+                    </div>
+                </div>
+                <div class="radio-item" data-value="comfortable">
+                    <input type="radio" name="q9" value="comfortable" class="radio-input" id="q9-comfortable">
+                    <div class="radio-content">
+                        <label class="radio-label" for="q9-comfortable">Generally comfortable</label>
+                        <div class="radio-description">Can adapt to new tech with some learning</div>
+                    </div>
+                </div>
+                <div class="radio-item" data-value="cautious">
+                    <input type="radio" name="q9" value="cautious" class="radio-input" id="q9-cautious">
+                    <div class="radio-content">
+                        <label class="radio-label" for="q9-cautious">Prefer proven technology</label>
+                        <div class="radio-description">Like things simple and familiar</div>
+                    </div>
+                </div>
+                <div class="radio-item" data-value="traditional">
+                    <input type="radio" name="q9" value="traditional" class="radio-input" id="q9-traditional">
+                    <div class="radio-content">
+                        <label class="radio-label" for="q9-traditional">Prefer traditional systems</label>
+                        <div class="radio-description">Want minimal learning curve</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Question 10: Purchase Timeline -->
+        <div class="question-container" data-question="10">
+            <div class="question-header">
+                <div class="question-number">Question 10 of 15</div>
+                <h2 class="question-title">When are you planning to buy?</h2>
+                <p class="question-subtitle">Timing affects available models, incentives, and our recommendations.</p>
+            </div>
+            <div class="radio-group" id="q10-group">
+                <div class="radio-item" data-value="immediately">
+                    <input type="radio" name="q10" value="immediately" class="radio-input" id="q10-immediately">
+                    <div class="radio-content">
+                        <label class="radio-label" for="q10-immediately">Within 1 month</label>
+                        <div class="radio-description">Ready to buy now</div>
+                    </div>
+                </div>
+                <div class="radio-item" data-value="soon">
+                    <input type="radio" name="q10" value="soon" class="radio-input" id="q10-soon">
+                    <div class="radio-content">
+                        <label class="radio-label" for="q10-soon">1-3 months</label>
+                        <div class="radio-description">Actively shopping and comparing</div>
+                    </div>
+                </div>
+                <div class="radio-item" data-value="planning">
+                    <input type="radio" name="q10" value="planning" class="radio-input" id="q10-planning">
+                    <div class="radio-content">
+                        <label class="radio-label" for="q10-planning">3-12 months</label>
+                        <div class="radio-description">Planning ahead, gathering information</div>
+                    </div>
+                </div>
+                <div class="radio-item" data-value="future">
+                    <input type="radio" name="q10" value="future" class="radio-input" id="q10-future">
+                    <div class="radio-content">
+                        <label class="radio-label" for="q10-future">More than 1 year</label>
+                        <div class="radio-description">Just starting to explore options</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Question 11: Current Vehicle -->
+        <div class="question-container" data-question="11">
+            <div class="question-header">
+                <div class="question-number">Question 11 of 15</div>
+                <h2 class="question-title">What do you currently drive?</h2>
+                <p class="question-subtitle">This helps us calculate your trade-in value and compare with your current costs.</p>
+            </div>
+            <div class="vehicle-grid">
+                <div class="form-group">
+                    <label class="form-label" for="q11-year">Year</label>
+                    <select id="q11-year" name="q11-year" class="form-select" required>
+                        <option value="">Select year</option>
+                        <option value="2024">2024</option>
+                        <option value="2023">2023</option>
+                        <option value="2022">2022</option>
+                        <option value="2021">2021</option>
+                        <option value="2020">2020</option>
+                        <option value="2019">2019</option>
+                        <option value="2018">2018</option>
+                        <option value="2017">2017</option>
+                        <option value="2016">2016</option>
+                        <option value="2015">2015</option>
+                        <option value="older">2014 or older</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="q11-make">Make</label>
+                    <input type="text" id="q11-make" name="q11-make" class="form-input" placeholder="e.g., Toyota, Ford, Honda" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="form-label" for="q11-model">Model</label>
+                <input type="text" id="q11-model" name="q11-model" class="form-input" placeholder="e.g., Camry, F-150, Civic" required>
+            </div>
+        </div>
+
+        <!-- Question 12: Current MPG -->
+        <div class="question-container" data-question="12">
+            <div class="question-header">
+                <div class="question-number">Question 12 of 15</div>
+                <h2 class="question-title">What's your current vehicle's gas mileage?</h2>
+                <p class="question-subtitle">This helps us calculate your current fuel costs for comparison.</p>
+            </div>
+            <div class="radio-group" id="q12-group">
+                <div class="radio-item" data-value="15">
+                    <input type="radio" name="q12" value="15" class="radio-input" id="q12-15">
+                    <div class="radio-content">
+                        <label class="radio-label" for="q12-15">Under 20 MPG</label>
+                        <div class="radio-description">Large trucks, SUVs, or performance vehicles</div>
+                    </div>
+                </div>
+                <div class="radio-item" data-value="25">
+                    <input type="radio" name="q12" value="25" class="radio-input" id="q12-25">
+                    <div class="radio-content">
+                        <label class="radio-label" for="q12-25">20-30 MPG</label>
+                        <div class="radio-description">Average SUVs and sedans</div>
+                    </div>
+                </div>
+                <div class="radio-item" data-value="35">
+                    <input type="radio" name="q12" value="35" class="radio-input" id="q12-35">
+                    <div class="radio-content">
+                        <label class="radio-label" for="q12-35">30-40 MPG</label>
+                        <div class="radio-description">Efficient sedans and small SUVs</div>
+                    </div>
+                </div>
+                <div class="radio-item" data-value="45">
+                    <input type="radio" name="q12" value="45" class="radio-input" id="q12-45">
+                    <div class="radio-content">
+                        <label class="radio-label" for="q12-45">40+ MPG</label>
+                        <div class="radio-description">Hybrids or very efficient vehicles</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Question 13: Financing -->
+        <div class="question-container" data-question="13">
+            <div class="question-header">
+                <div class="question-number">Question 13 of 15</div>
+                <h2 class="question-title">How do you plan to finance your vehicle?</h2>
+                <p class="question-subtitle">Different financing options affect the total cost analysis and available incentives.</p>
+            </div>
+            <div class="radio-group" id="q13-group">
+                <div class="radio-item" data-value="cash">
+                    <input type="radio" name="q13" value="cash" class="radio-input" id="q13-cash">
+                    <div class="radio-content">
+                        <label class="radio-label" for="q13-cash">Pay cash</label>
+                        <div class="radio-description">Full purchase price upfront</div>
+                    </div>
+                </div>
+                <div class="radio-item" data-value="finance">
+                    <input type="radio" name="q13" value="finance" class="radio-input" id="q13-finance">
+                    <div class="radio-content">
+                        <label class="radio-label" for="q13-finance">Finance/Loan</label>
+                        <div class="radio-description">Traditional auto loan with monthly payments</div>
+                    </div>
+                </div>
+                <div class="radio-item" data-value="lease">
+                    <input type="radio" name="q13" value="lease" class="radio-input" id="q13-lease">
+                    <div class="radio-content">
+                        <label class="radio-label" for="q13-lease">Lease</label>
+                        <div class="radio-description">Lower monthly payments, return after 2-3 years</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Question 14: Must-Have Features -->
+        <div class="question-container" data-question="14">
+            <div class="question-header">
+                <div class="question-number">Question 14 of 15</div>
+                <h2 class="question-title">What features are most important to you?</h2>
+                <p class="question-subtitle">Select all that apply. This helps us recommend vehicles that match your priorities.</p>
+            </div>
+            <div class="checkbox-group" id="q14-group">
+                <div class="checkbox-item" data-value="safety">
+                    <input type="checkbox" name="q14" value="safety" class="checkbox-input" id="q14-safety">
+                    <div class="checkbox-content">
+                        <label class="checkbox-label" for="q14-safety">Advanced safety features</label>
+                        <div class="checkbox-description">Automatic emergency braking, blind spot monitoring</div>
+                    </div>
+                </div>
+                <div class="checkbox-item" data-value="tech">
+                    <input type="checkbox" name="q14" value="tech" class="checkbox-input" id="q14-tech">
+                    <div class="checkbox-content">
+                        <label class="checkbox-label" for="q14-tech">Latest technology</label>
+                        <div class="checkbox-description">Large touchscreen, smartphone integration</div>
+                    </div>
+                </div>
+                <div class="checkbox-item" data-value="performance">
+                    <input type="checkbox" name="q14" value="performance" class="checkbox-input" id="q14-performance">
+                    <div class="checkbox-content">
+                        <label class="checkbox-label" for="q14-performance">Performance</label>
+                        <div class="checkbox-description">Acceleration, handling, power</div>
+                    </div>
+                </div>
+                <div class="checkbox-item" data-value="comfort">
+                    <input type="checkbox" name="q14" value="comfort" class="checkbox-input" id="q14-comfort">
+                    <div class="checkbox-content">
+                        <label class="checkbox-label" for="q14-comfort">Comfort & luxury</label>
+                        <div class="checkbox-description">Premium materials, quiet cabin, smooth ride</div>
+                    </div>
+                </div>
+                <div class="checkbox-item" data-value="cargo">
+                    <input type="checkbox" name="q14" value="cargo" class="checkbox-input" id="q14-cargo">
+                    <div class="checkbox-content">
+                        <label class="checkbox-label" for="q14-cargo">Cargo space</label>
+                        <div class="checkbox-description">Room for family, gear, or work equipment</div>
+                    </div>
+                </div>
+                <div class="checkbox-item" data-value="reliability">
+                    <input type="checkbox" name="q14" value="reliability" class="checkbox-input" id="q14-reliability">
+                    <div class="checkbox-content">
+                        <label class="checkbox-label" for="q14-reliability">Reliability</label>
+                        <div class="checkbox-description">Proven track record, low maintenance</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Question 15: Contact Information -->
+        <div class="question-container" data-question="15">
+            <div class="question-header">
+                <div class="question-number">Question 15 of 15</div>
+                <h2 class="question-title">Where should we send your report?</h2>
+                <p class="question-subtitle">Your personalized 25-page analysis will be delivered via email within 24 hours.</p>
+            </div>
+            <div class="form-group">
+                <label class="form-label" for="q15-email">Email Address</label>
+                <input type="email" id="q15-email" name="q15-email" class="form-input" placeholder="your@email.com" required>
+                <div class="form-error" id="q15-email-error"></div>
+            </div>
+            <div class="form-group">
+                <label class="form-label" for="q15-name">Full Name</label>
+                <input type="text" id="q15-name" name="q15-name" class="form-input" placeholder="Your full name" required>
+                <div class="form-error" id="q15-name-error"></div>
+            </div>
+        </div>
+
+        <!-- Loading State -->
+        <div class="loading-container" id="loading-container">
+            <div class="loading-spinner"></div>
+            <div class="loading-text">Analyzing Your Responses</div>
+            <div class="loading-subtitle">Generating your personalized vehicle report...</div>
+        </div>
+
+        <!-- Success State -->
+        <div class="success-container" id="success-container">
+            <div class="success-icon">✓</div>
+            <h2 style="color: var(--text-primary); margin-bottom: 1rem;">Report Processing Complete!</h2>
+            <p style="color: var(--text-secondary); margin-bottom: 2rem;">Your personalized 25-page vehicle analysis will be delivered to your email within 24 hours.</p>
+            <button class="nav-button" onclick="window.location.href='index.html'">Return to Home</button>
+        </div>
+
+        <!-- Navigation -->
+        <div class="navigation-container" id="navigation-container">
+            <button class="nav-button secondary" id="prev-button" onclick="previousQuestion()" disabled>Previous</button>
+            <button class="nav-button" id="next-button" onclick="nextQuestion()">Next Question</button>
+        </div>
+    </div>
+
+    <!-- Include the data collection system -->
+    <script src="data_collection_system.js"></script>
+    
     <script>
-        // Package selection handling
-        document.querySelectorAll('input[name="package"]').forEach(radio => {
-            radio.addEventListener('change', function() {
-                // Update visual selection
-                document.querySelectorAll('.package-option').forEach(option => {
-                    option.classList.remove('selected');
-                });
-                this.closest('.package-option').classList.add('selected');
-                
-                // Update pricing
-                const packageName = this.value === 'personal-report' ? 'Personal Report' : 'Additional Scenario';
-                const price = this.value === 'personal-report' ? '$79.00' : '$10.00';
-                
-                document.getElementById('selected-package').textContent = packageName;
-                document.getElementById('package-price').textContent = price;
-                document.getElementById('total-price').textContent = price;
-            });
+        // Questionnaire State Management
+        let currentQuestion = 1;
+        const totalQuestions = 15;
+        let responses = {};
+        let analysisEngine = null;
+        let reportProcessor = null;
+
+        // Initialize the system
+        document.addEventListener('DOMContentLoaded', function() {
+            try {
+                analysisEngine = new VehicleAnalysisEngine();
+                reportProcessor = new ReportDataProcessor();
+                console.log('Data collection system initialized successfully');
+            } catch (error) {
+                console.error('Error initializing data collection system:', error);
+            }
+            
+            updateProgress();
+            setupEventListeners();
+            showQuestion(1);
         });
 
-        // Form submission handling
-        document.getElementById('orderForm').addEventListener('submit', function(e) {
-            e.preventDefault();
+        // Setup event listeners for form interactions
+        function setupEventListeners() {
+            // Radio button interactions
+            document.querySelectorAll('.radio-item').forEach(item => {
+                item.addEventListener('click', function() {
+                    const radio = this.querySelector('input[type="radio"]');
+                    const groupName = radio.name;
+                    
+                    // Clear previous selections in this group
+                    document.querySelectorAll(`input[name="${groupName}"]`).forEach(r => {
+                        r.closest('.radio-item').classList.remove('selected');
+                    });
+                    
+                    // Select this item
+                    radio.checked = true;
+                    this.classList.add('selected');
+                    
+                    // Store response
+                    responses[groupName] = radio.value;
+                    
+                    // Enable next button
+                    updateNavigationState();
+                });
+            });
+
+            // Checkbox interactions
+            document.querySelectorAll('.checkbox-item').forEach(item => {
+                item.addEventListener('click', function() {
+                    const checkbox = this.querySelector('input[type="checkbox"]');
+                    checkbox.checked = !checkbox.checked;
+                    
+                    if (checkbox.checked) {
+                        this.classList.add('selected');
+                    } else {
+                        this.classList.remove('selected');
+                    }
+                    
+                    // Store array of selected checkboxes
+                    const groupName = checkbox.name;
+                    const selected = Array.from(document.querySelectorAll(`input[name="${groupName}"]:checked`))
+                        .map(cb => cb.value);
+                    responses[groupName] = selected;
+                    
+                    updateNavigationState();
+                });
+            });
+
+            // Text input changes
+            document.querySelectorAll('.form-input, .form-select').forEach(input => {
+                input.addEventListener('input', function() {
+                    responses[this.name] = this.value;
+                    clearError(this);
+                    updateNavigationState();
+                });
+
+                input.addEventListener('change', function() {
+                    responses[this.name] = this.value;
+                    updateNavigationState();
+                });
+            });
+        }
+
+        // Show specific question
+        function showQuestion(questionNum) {
+            // Hide all questions
+            document.querySelectorAll('.question-container').forEach(q => {
+                q.classList.remove('active');
+            });
             
-            // Collect form data
-            const formData = new FormData(this);
-            const orderData = Object.fromEntries(formData);
+            // Show current question
+            const questionContainer = document.querySelector(`[data-question="${questionNum}"]`);
+            if (questionContainer) {
+                questionContainer.classList.add('active');
+            }
             
-            // Store order data in localStorage for now
-            localStorage.setItem('orderData', JSON.stringify(orderData));
+            currentQuestion = questionNum;
+            updateProgress();
+            updateNavigationState();
+        }
+
+        // Update progress bar
+        function updateProgress() {
+            const percentage = Math.round((currentQuestion / totalQuestions) * 100);
+            document.getElementById('current-question').textContent = currentQuestion;
+            document.getElementById('progress-percentage').textContent = percentage;
+            document.getElementById('progress-fill').style.width = percentage + '%';
+        }
+
+        // Update navigation button states
+        function updateNavigationState() {
+            const prevButton = document.getElementById('prev-button');
+            const nextButton = document.getElementById('next-button');
             
-            // Redirect to questionnaire
-            window.location.href = './questionnaire.html';
+            // Previous button
+            prevButton.disabled = currentQuestion === 1;
+            
+            // Next button - check if current question is answered
+            const isAnswered = isCurrentQuestionAnswered();
+            nextButton.disabled = !isAnswered;
+            
+            // Update button text for last question
+            if (currentQuestion === totalQuestions) {
+                nextButton.textContent = 'Generate Report';
+            } else {
+                nextButton.textContent = 'Next Question';
+            }
+        }
+
+        // Check if current question is answered
+        function isCurrentQuestionAnswered() {
+            switch(currentQuestion) {
+                case 1:
+                    return validateZipCode(responses.q1);
+                case 2:
+                    return !!responses.q2;
+                case 3:
+                    return !!responses.q3;
+                case 4:
+                    return !!responses.q4;
+                case 5:
+                    return !!responses.q5;
+                case 6:
+                    return !!responses.q6;
+                case 7:
+                    return !!responses.q7;
+                case 8:
+                    return !!responses.q8;
+                case 9:
+                    return !!responses.q9;
+                case 10:
+                    return !!responses.q10;
+                case 11:
+                    return !!(responses['q11-year'] && responses['q11-make'] && responses['q11-model']);
+                case 12:
+                    return !!responses.q12;
+                case 13:
+                    return !!responses.q13;
+                case 14:
+                    return !!(responses.q14 && responses.q14.length > 0);
+                case 15:
+                    return validateEmail(responses['q15-email']) && !!responses['q15-name'];
+                default:
+                    return false;
+            }
+        }
+
+        // Navigation functions
+        function nextQuestion() {
+            if (!isCurrentQuestionAnswered()) {
+                showValidationErrors();
+                return;
+            }
+
+            if (currentQuestion < totalQuestions) {
+                showQuestion(currentQuestion + 1);
+            } else {
+                // Submit the questionnaire
+                submitQuestionnaire();
+            }
+        }
+
+        function previousQuestion() {
+            if (currentQuestion > 1) {
+                showQuestion(currentQuestion - 1);
+            }
+        }
+
+        // Validation functions
+        function validateZipCode(zipCode) {
+            if (!zipCode) return false;
+            return /^\d{5}$/.test(zipCode);
+        }
+
+        function validateEmail(email) {
+            if (!email) return false;
+            return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+        }
+
+        function showValidationErrors() {
+            switch(currentQuestion) {
+                case 1:
+                    if (!validateZipCode(responses.q1)) {
+                        showError('q1', 'Please enter a valid 5-digit ZIP code');
+                    }
+                    break;
+                case 15:
+                    if (!validateEmail(responses['q15-email'])) {
+                        showError('q15-email', 'Please enter a valid email address');
+                    }
+                    if (!responses['q15-name']) {
+                        showError('q15-name', 'Please enter your full name');
+                    }
+                    break;
+            }
+        }
+
+        function showError(fieldId, message) {
+            const field = document.getElementById(fieldId);
+            const errorElement = document.getElementById(fieldId + '-error');
+            
+            if (field) {
+                field.classList.add('error');
+            }
+            if (errorElement) {
+                errorElement.textContent = message;
+            }
+        }
+
+        function clearError(field) {
+            field.classList.remove('error');
+            const errorElement = document.getElementById(field.id + '-error');
+            if (errorElement) {
+                errorElement.textContent = '';
+            }
+        }
+
+        // Submit questionnaire and generate report
+        async function submitQuestionnaire() {
+            try {
+                // Hide questionnaire and show loading
+                document.querySelector('.question-container.active').classList.remove('active');
+                document.getElementById('navigation-container').style.display = 'none';
+                document.getElementById('loading-container').classList.add('active');
+
+                // Prepare data for analysis
+                const analysisData = prepareAnalysisData();
+                
+                // Run analysis
+                console.log('Running vehicle analysis with data:', analysisData);
+                const analysisResult = analysisEngine.analyzeVehicleChoice(analysisData);
+                
+                // Process into report format
+                const reportData = reportProcessor.processAnalysisForReport(analysisResult, analysisData);
+                
+                // Simulate report generation delay
+                await new Promise(resolve => setTimeout(resolve, 3000));
+                
+                // Log the complete analysis (in real implementation, this would be sent to backend)
+                console.log('Analysis Complete:', analysisResult);
+                console.log('Report Data:', reportData);
+                
+                // Store data for potential backend submission
+                const completeSubmission = {
+                    responses: responses,
+                    analysisData: analysisData,
+                    analysisResult: analysisResult,
+                    reportData: reportData,
+                    timestamp: new Date().toISOString(),
+                    userInfo: {
+                        email: responses['q15-email'],
+                        name: responses['q15-name']
+                    }
+                };
+                
+                // In a real implementation, submit to backend here
+                await submitToBackend(completeSubmission);
+                
+                // Show success
+                document.getElementById('loading-container').classList.remove('active');
+                document.getElementById('success-container').classList.add('active');
+                
+            } catch (error) {
+                console.error('Error processing questionnaire:', error);
+                alert('There was an error processing your responses. Please try again.');
+                
+                // Return to questionnaire
+                document.getElementById('loading-container').classList.remove('active');
+                showQuestion(currentQuestion);
+                document.getElementById('navigation-container').style.display = 'flex';
+            }
+        }
+
+        // Prepare data for analysis engine
+        function prepareAnalysisData() {
+            return {
+                zipCode: responses.q1,
+                annualMileage: parseInt(responses.q2),
+                dailyCommute: parseInt(responses.q3),
+                budget: parseInt(responses.q4),
+                vehicleType: responses.q5,
+                homeCharging: responses.q6,
+                longTrips: responses.q7,
+                environmentalPriority: responses.q8,
+                techComfort: responses.q9,
+                timeframe: responses.q10,
+                currentVehicle: {
+                    year: responses['q11-year'],
+                    make: responses['q11-make'],
+                    model: responses['q11-model']
+                },
+                currentMPG: parseInt(responses.q12),
+                financing: responses.q13,
+                priorities: responses.q14 || [],
+                contact: {
+                    email: responses['q15-email'],
+                    name: responses['q15-name']
+                }
+            };
+        }
+
+        // Simulate backend submission
+        async function submitToBackend(data) {
+            // In a real implementation, this would POST to your backend API
+            // For now, we'll just log it and simulate success
+            console.log('Submitting to backend:', data);
+            
+            // Simulate API call delay
+            await new Promise(resolve => setTimeout(resolve, 1000));
+            
+            // Store in localStorage as a fallback
+            localStorage.setItem('plugorpump_submission_' + Date.now(), JSON.stringify(data));
+            
+            return { success: true, submissionId: 'sim_' + Date.now() };
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                const nextBtn = document.getElementById('next-button');
+                if (nextBtn && !nextBtn.disabled) {
+                    nextQuestion();
+                }
+            }
         });
+
+        console.log("Questionnaire system loaded and ready");
     </script>
 </body>
 </html>

@@ -1286,95 +1286,308 @@
                 document.getElementById('navigation-container').style.display = 'none';
                 document.getElementById('loading-container').classList.add('active');
 
-                // Prepare data for analysis
-                const analysisData = prepareAnalysisData();
+                // Prepare data for backend
+                const backendData = prepareBackendData();
                 
-                // Run analysis
-                console.log('Running vehicle analysis with data:', analysisData);
-                const analysisResult = analysisEngine.analyzeVehicleChoice(analysisData);
+                console.log('Submitting to backend API:', backendData);
                 
-                // Process into report format
-                const reportData = reportProcessor.processAnalysisForReport(analysisResult, analysisData);
+                // Submit to backend API
+                const result = await submitToBackend(backendData);
                 
-                // Simulate report generation delay
-                await new Promise(resolve => setTimeout(resolve, 3000));
-                
-                // Log the complete analysis (in real implementation, this would be sent to backend)
-                console.log('Analysis Complete:', analysisResult);
-                console.log('Report Data:', reportData);
-                
-                // Store data for potential backend submission
-                const completeSubmission = {
-                    responses: responses,
-                    analysisData: analysisData,
-                    analysisResult: analysisResult,
-                    reportData: reportData,
-                    timestamp: new Date().toISOString(),
-                    userInfo: {
-                        email: responses['q15-email'],
-                        name: responses['q15-name']
-                    }
-                };
-                
-                // In a real implementation, submit to backend here
-                await submitToBackend(completeSubmission);
-                
-                // Show success
-                document.getElementById('loading-container').classList.remove('active');
-                document.getElementById('success-container').classList.add('active');
+                if (result.success) {
+                    // Show success
+                    document.getElementById('loading-container').classList.remove('active');
+                    document.getElementById('success-container').classList.add('active');
+                    
+                    // Update success message with personalized info
+                    updateSuccessMessage(result);
+                } else {
+                    throw new Error(result.message || 'Failed to generate report');
+                }
                 
             } catch (error) {
                 console.error('Error processing questionnaire:', error);
-                alert('There was an error processing your responses. Please try again.');
+                
+                // Show user-friendly error message
+                document.getElementById('loading-container').classList.remove('active');
+                showErrorMessage(error.message);
                 
                 // Return to questionnaire
-                document.getElementById('loading-container').classList.remove('active');
                 showQuestion(currentQuestion);
                 document.getElementById('navigation-container').style.display = 'flex';
             }
         }
 
-        // Prepare data for analysis engine
-        function prepareAnalysisData() {
-            return {
-                zipCode: responses.q1,
-                annualMileage: parseInt(responses.q2),
-                dailyCommute: parseInt(responses.q3),
-                budget: parseInt(responses.q4),
-                vehicleType: responses.q5,
-                homeCharging: responses.q6,
-                longTrips: responses.q7,
-                environmentalPriority: responses.q8,
-                techComfort: responses.q9,
-                timeframe: responses.q10,
-                currentVehicle: {
-                    year: responses['q11-year'],
-                    make: responses['q11-make'],
-                    model: responses['q11-model']
-                },
-                currentMPG: parseInt(responses.q12),
-                financing: responses.q13,
-                priorities: responses.q14 || [],
-                contact: {
-                    email: responses['q15-email'],
-                    name: responses['q15-name']
+        // Submit to backend API
+        async function submitToBackend(data) {
+            try {
+                // Determine API endpoint (local development vs production)
+                const API_BASE = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' 
+                    ? 'http://localhost:3000/api' 
+                    : 'https://api.plugorpump.com/api'; // Update this with your actual API domain
+                
+                const response = await fetch(`${API_BASE}/reports/generate`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data)
+                });
+
+                if (!response.ok) {
+                    const errorData = await response.json();
+                    throw new Error(errorData.message || `HTTP error! status: ${response.status}`);
                 }
+
+                const result = await response.json();
+                console.log('Backend response:', result);
+                
+                return result;
+                
+            } catch (error) {
+                console.error('Backend submission error:', error);
+                
+                // Fallback: store locally and show alternative message
+                localStorage.setItem('plugorpump_submission_' + Date.now(), JSON.stringify(data));
+                
+                if (error.name === 'TypeError' && error.message.includes('fetch')) {
+                    throw new Error('Unable to connect to our servers. Please check your internet connection and try again.');
+                } else {
+                    throw error;
+                }
+            }
+        }
+
+        // Update success message with personalized information
+        function updateSuccessMessage(result) {
+            const successContainer = document.getElementById('success-container');
+            const userName = responses['q15-name'].split(' ')[0]; // First name
+            
+            // Update the success message with personalized content
+            const personalizedHTML = `
+                <div class="success-icon">✓</div>
+                <h2 style="color: var(--elegant-blue); margin-bottom: 1rem;">Report Generated Successfully!</h2>
+                <p style="font-size: 1.25rem; margin-bottom: 2rem; color: var(--text-secondary);">
+                    Hi ${userName}! Your comprehensive vehicle analysis report has been generated and sent to your email.
+                </p>
+                
+                ${result.summary ? `
+                <div style="background: var(--light-blue); padding: 2rem; border-radius: 10px; margin: 2rem 0; text-align: left;">
+                    <h3 style="color: var(--elegant-blue); margin-bottom: 1rem;">Quick Summary</h3>
+                    <p style="margin-bottom: 1rem;"><strong>Recommendation:</strong> ${result.summary.recommendation}</p>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-top: 1.5rem;">
+                        <div style="text-align: center;">
+                            <div style="font-size: 1.5rem; font-weight: bold; color: var(--success-green);">$${result.summary.totalCostSavings ? Math.round(result.summary.totalCostSavings).toLocaleString() : '0'}</div>
+                            <div style="font-size: 0.9rem; color: var(--text-secondary);">Potential Savings</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div style="font-size: 1.5rem; font-weight: bold; color: var(--accent-blue);">${result.summary.paybackPeriod ? result.summary.paybackPeriod.toFixed(1) : 'N/A'} years</div>
+                            <div style="font-size: 0.9rem; color: var(--text-secondary);">Payback Period</div>
+                        </div>
+                    </div>
+                </div>
+                ` : ''}
+                
+                <div style="background: var(--white); border: 2px solid var(--border-light); border-radius: 10px; padding: 2rem; margin: 2rem 0;">
+                    <h4 style="color: var(--text-primary); margin-bottom: 1rem;">What's Next?</h4>
+                    <ul style="text-align: left; color: var(--text-secondary); line-height: 1.8;">
+                        <li>Check your email for the complete 25-page PDF report</li>
+                        <li>Review personalized vehicle recommendations</li>
+                        <li>Explore financing options and incentives in your area</li>
+                        <li>Schedule test drives based on our recommendations</li>
+                    </ul>
+                </div>
+                
+                <p style="color: var(--text-light); font-size: 0.9rem; margin-top: 2rem;">
+                    Report ID: ${result.reportId || 'N/A'}<br>
+                    Questions? Contact us at support@plugorpump.com
+                </p>
+                
+                <div style="margin-top: 2rem;">
+                    <a href="index.html" class="nav-button" style="text-decoration: none; display: inline-block;">
+                        Return to Home
+                    </a>
+                </div>
+            `;
+            
+            successContainer.innerHTML = personalizedHTML;
+        }
+
+        // Show error message to user
+        function showErrorMessage(message) {
+            const errorHTML = `
+                <div style="text-align: center; padding: 4rem 2rem;">
+                    <div style="width: 80px; height: 80px; background: var(--warning-orange); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 2rem; font-size: 2rem; color: white;">!</div>
+                    <h2 style="color: var(--warning-orange); margin-bottom: 1rem;">Something Went Wrong</h2>
+                    <p style="color: var(--text-secondary); margin-bottom: 2rem; max-width: 400px; margin-left: auto; margin-right: auto;">${message}</p>
+                    <p style="color: var(--text-light); font-size: 0.9rem; margin-bottom: 2rem;">Your responses have been saved locally. Please try again or contact support if the issue persists.</p>
+                    <button onclick="location.reload()" class="nav-button">Try Again</button>
+                </div>
+            `;
+            
+            // Create temporary error container
+            const errorContainer = document.createElement('div');
+            errorContainer.className = 'success-container active';
+            errorContainer.innerHTML = errorHTML;
+            
+            // Replace loading container
+            const loadingContainer = document.getElementById('loading-container');
+            loadingContainer.parentNode.insertBefore(errorContainer, loadingContainer.nextSibling);
+        }
+
+        // Prepare data for backend submission (maps to backend validation schema)
+        function prepareBackendData() {
+            // Map responses to backend expected format
+            const mappedResponses = {
+                drivingHabits: mapDrivingHabits(responses.q2, responses.q3),
+                dailyMiles: mapDailyMiles(responses.q2),
+                vehicleAge: mapVehicleAge(responses['q11-year']),
+                fuelCosts: mapFuelCosts(responses.q2),
+                maintenanceFreq: 'quarterly', // Default based on responses
+                maintenanceCosts: mapMaintenanceCosts(responses.q12),
+                chargingAccess: mapChargingAccess(responses.q6),
+                purchaseBudget: mapBudget(responses.q4),
+                vehicleType: mapVehicleType(responses.q5),
+                primaryUse: mapPrimaryUse(responses.q7),
+                environmentalConcern: mapEnvironmentalConcern(responses.q8),
+                techComfort: mapTechComfort(responses.q9),
+                incentivesInterest: 'very-interested', // Default based on questionnaire
+                timelineDecision: mapTimeline(responses.q10),
+                currentSatisfaction: 'neutral' // Default
             };
+
+            const userInfo = {
+                name: responses['q15-name'],
+                email: responses['q15-email'],
+                zipCode: responses.q1
+            };
+
+            return {
+                responses: mappedResponses,
+                userInfo: userInfo
+            };
+        }
+
+        // Mapping functions to convert questionnaire responses to backend format
+        function mapDailyMiles(annualMileage) {
+            const daily = parseInt(annualMileage) / 365;
+            if (daily < 25) return 'under25';
+            if (daily <= 50) return '25to50';
+            if (daily <= 100) return '50to100';
+            return 'over100';
+        }
+
+        function mapBudget(budget) {
+            const amount = parseInt(budget);
+            if (amount < 30000) return 'under30k';
+            if (amount <= 50000) return '30to50k';
+            if (amount <= 70000) return '50to70k';
+            return 'over70k';
+        }
+
+        function mapVehicleType(type) {
+            const mapping = {
+                'sedan': 'sedan',
+                'suv': 'suv',
+                'truck': 'truck',
+                'hatchback': 'compact',
+                'luxury': 'luxury'
+            };
+            return mapping[type] || 'sedan';
+        }
+
+        function mapChargingAccess(access) {
+            const mapping = {
+                'garage_240v': 'home',
+                'garage_120v': 'home', 
+                'driveway': 'home',
+                'none': 'none'
+            };
+            return mapping[access] || 'none';
+        }
+
+        function mapEnvironmentalConcern(concern) {
+            const mapping = {
+                'critical': 'very-important',
+                'important': 'very-important',
+                'somewhat': 'somewhat',
+                'not_important': 'not-important'
+            };
+            return mapping[concern] || 'neutral';
+        }
+
+        function mapTechComfort(comfort) {
+            const mapping = {
+                'early_adopter': 'early-adopter',
+                'comfortable': 'comfortable',
+                'cautious': 'cautious',
+                'traditional': 'traditional'
+            };
+            return mapping[comfort] || 'comfortable';
+        }
+
+        function mapTimeline(timeline) {
+            const mapping = {
+                'immediately': 'immediate',
+                'soon': '3months',
+                'planning': '6months',
+                'future': 'future'
+            };
+            return mapping[timeline] || '6months';
+        }
+
+        function mapDrivingHabits(annualMileage, dailyCommute) {
+            // Use daily commute to infer driving type
+            const commute = parseInt(dailyCommute);
+            if (commute <= 10) return 'city';
+            if (commute >= 50) return 'highway';
+            return 'mixed';
+        }
+
+        function mapVehicleAge(year) {
+            const currentYear = new Date().getFullYear();
+            const age = currentYear - parseInt(year);
+            if (age < 3) return 'under3';
+            if (age <= 7) return '3to7';
+            if (age <= 12) return '7to12';
+            return 'over12';
+        }
+
+        function mapFuelCosts(annualMileage) {
+            // Estimate based on annual mileage (assuming average MPG and gas price)
+            const miles = parseInt(annualMileage);
+            const estimatedCost = (miles / 25) * 3.50 * 12; // Monthly estimate
+            if (estimatedCost < 150) return 'under150';
+            if (estimatedCost <= 300) return '150to300';
+            if (estimatedCost <= 500) return '300to500';
+            return 'over500';
+        }
+
+        function mapMaintenanceCosts(mpg) {
+            // Estimate maintenance costs based on vehicle efficiency
+            const efficiency = parseInt(mpg);
+            if (efficiency > 35) return 'under100';
+            if (efficiency > 25) return '100to300';
+            if (efficiency > 20) return '300to600';
+            return 'over600';
+        }
+
+        function mapPrimaryUse(longTrips) {
+            // Map based on long trip frequency
+            const mapping = {
+                'never': 'family',
+                'few_times': 'commuting',
+                'monthly': 'recreation',
+                'weekly': 'business'
+            };
+            return mapping[longTrips] || 'commuting';
         }
 
         // Simulate backend submission
         async function submitToBackend(data) {
-            // In a real implementation, this would POST to your backend API
-            // For now, we'll just log it and simulate success
-            console.log('Submitting to backend:', data);
-            
-            // Simulate API call delay
-            await new Promise(resolve => setTimeout(resolve, 1000));
-            
-            // Store in localStorage as a fallback
-            localStorage.setItem('plugorpump_submission_' + Date.now(), JSON.stringify(data));
-            
-            return { success: true, submissionId: 'sim_' + Date.now() };
+            // This function has been replaced with the real backend integration above
+            console.log('Legacy function - use the new submitToBackend function');
+            return { success: false, message: 'Legacy function called' };
         }
 
         // Keyboard navigation

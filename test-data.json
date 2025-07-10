@@ -1,0 +1,24 @@
+{
+  "responses": {
+    "drivingHabits": "mixed",
+    "dailyMiles": "25to50",
+    "vehicleAge": "3to7",
+    "fuelCosts": "150to300",
+    "maintenanceFreq": "quarterly",
+    "maintenanceCosts": "100to300",
+    "chargingAccess": "home",
+    "purchaseBudget": "30to50k",
+    "vehicleType": "sedan",
+    "primaryUse": "commuting",
+    "environmentalConcern": "very-important",
+    "techComfort": "comfortable",
+    "incentivesInterest": "very-interested",
+    "timelineDecision": "3months",
+    "currentSatisfaction": "neutral"
+  },
+  "userInfo": {
+    "name": "John Doe",
+    "email": "test@example.com",
+    "zipCode": "80301"
+  }
+}
